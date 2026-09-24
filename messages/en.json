@@ -59,11 +59,21 @@
     },
     "privacy": {
       "heading": "Privacy",
-      "body": "When you self-host ManuHaven, your data lives in your own database and nobody else can see it — there is no telemetry and no phone-home. This notice covers the hosted demo only. The demo stores the account and manuscripts you create so the app can function, and demo accounts are deleted after seven days. AI features require your own API key; manuscript text sent to a model provider is processed and discarded, never logged, never cached, and never used for training. Because the key is yours, your data relationship for that text is directly with the provider under their terms. Optional analytics are disabled unless a PostHog key is configured. When enabled they record only named product events, with no automatic click capture and no session recordings, and never include manuscript content."
+      "body": "ManuHaven is software you run yourself. Your account and manuscripts live in the database and storage of the server you use, and nobody else can see them. The software has no telemetry and never phones home. If someone else runs the server for you, they hold your data and their own privacy terms apply. AI features are off until an API key is configured, either your own in Settings or one the server's operator provides. Manuscript text sent to a model provider is processed and discarded by ManuHaven: never logged, never cached, and never used for training. Once it reaches the provider, the provider's terms for that key apply. Optional analytics are disabled unless the operator configures a PostHog key. When enabled they record only named product events, with no automatic click capture and no session recordings, and never include manuscript content."
     },
     "terms": {
       "heading": "License",
       "body": "ManuHaven is free software licensed under the GNU Affero General Public License v3.0. You may run, study, modify, and redistribute it. If you modify it and make it available to others over a network, you must also make your modified source available to them. The software is provided without warranty of any kind — see the LICENSE file for the full text, which governs in case of any conflict with this summary."
+    },
+    "errorBoundary": {
+      "title": "Something went wrong",
+      "body": "This page failed to load. Try again, or come back in a moment.",
+      "retry": "Try again"
+    },
+    "notFound": {
+      "title": "Page not found",
+      "body": "The page you're looking for doesn't exist or has moved.",
+      "home": "Back to the home page"
     }
   },
   "auth": {

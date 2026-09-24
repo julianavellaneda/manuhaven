@@ -59,11 +59,21 @@
     },
     "privacy": {
       "heading": "Privacidad",
-      "body": "Cuando alojas ManuHaven tú mismo, tus datos viven en tu propia base de datos y nadie más puede verlos: no hay telemetría ni comunicación de vuelta. Este aviso cubre únicamente la demo alojada. La demo guarda la cuenta y los manuscritos que crees para que la aplicación funcione, y las cuentas de demostración se eliminan a los siete días. Las funciones de IA requieren tu propia clave de API; el texto del manuscrito enviado a un proveedor de modelos se procesa y se descarta, nunca se registra, nunca se almacena en caché y nunca se usa para entrenar. Como la clave es tuya, tu relación de datos por ese texto es directamente con el proveedor bajo sus términos. La analítica opcional está desactivada salvo que se configure una clave de PostHog. Si se activa, solo registra eventos de producto con nombre, sin captura automática de clics ni grabación de sesiones, y nunca incluye el contenido del manuscrito."
+      "body": "ManuHaven es software que ejecutas tú mismo. Tu cuenta y tus manuscritos viven en la base de datos y el almacenamiento del servidor que usas, y nadie más puede verlos. El software no tiene telemetría ni se comunica de vuelta con nadie. Si otra persona administra el servidor por ti, ella guarda tus datos y se aplican sus propios términos de privacidad. Las funciones de IA están desactivadas hasta que se configura una clave de API: la tuya, en Ajustes, o una que proporcione quien administra el servidor. ManuHaven procesa y descarta el texto del manuscrito que se envía a un proveedor de modelos: nunca se registra, nunca se almacena en caché y nunca se usa para entrenar. Una vez que llega al proveedor, se aplican los términos del proveedor para esa clave. La analítica opcional está desactivada salvo que quien administra el servidor configure una clave de PostHog. Si se activa, solo registra eventos de producto con nombre, sin captura automática de clics ni grabación de sesiones, y nunca incluye el contenido del manuscrito."
     },
     "terms": {
       "heading": "Licencia",
       "body": "ManuHaven es software libre con licencia GNU Affero General Public License v3.0. Puedes ejecutarlo, estudiarlo, modificarlo y redistribuirlo. Si lo modificas y lo pones a disposición de otras personas por red, también debes poner a su disposición tu código modificado. El software se entrega sin garantía de ningún tipo; consulta el archivo LICENSE para ver el texto completo, que prevalece ante cualquier discrepancia con este resumen."
+    },
+    "errorBoundary": {
+      "title": "Algo salió mal",
+      "body": "No se pudo cargar esta página. Inténtalo de nuevo o vuelve en un momento.",
+      "retry": "Intentar de nuevo"
+    },
+    "notFound": {
+      "title": "Página no encontrada",
+      "body": "La página que buscas no existe o se movió.",
+      "home": "Volver al inicio"
     }
   },
   "auth": {
