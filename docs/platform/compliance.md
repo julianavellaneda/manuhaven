@@ -6,49 +6,50 @@ before touching the export pipeline or any AI feature.
 Scope note: this project is a self-hostable writing studio. It sells nothing, takes no
 payments, and distributes to no retailer, so commerce, payout, and tax rules are out of
 scope. What remains below are the rules that govern the *artifact* the software
-produces and the way it handles an author's text.
+produces and the way it handles an author's text. None of this is legal advice;
+operators and authors are responsible for the rules that apply to them.
 
 ---
 
-## GDPR
+## Personal data
 
-- Right to deletion: purge the user's files from storage (`{userId}/` prefix), then delete the user row, which cascades to everything they own.
-- Data portability: JSON/CSV export of all author data.
-- Operators of a hosted instance are the data controller for their own users.
+- Account deletion (`POST /api/account/delete`) purges the user's files from
+  storage (`{userId}/` prefix) first, then deletes the user row, which cascades to
+  everything they own.
+- Planned, not built: a self-service export of all of a user's data.
+- Whoever runs an instance is responsible for its users' data. The project itself
+  receives nothing: there is no telemetry, and optional PostHog analytics only run
+  when the operator configures a key.
 
-## EAA — European Accessibility Act (active 2025-06-28)
+## Accessibility
 
-- EPUB 3 output must pass DAISY ACE + EPUBCheck.
-- Embed `schema:accessibilityFeature` metadata in every EPUB.
-- WCAG 2.1 AA minimum for the web UI.
-- `exports.accessibility_score` JSONB stores the ACE report per export.
+- The web UI targets WCAG 2.1 AA.
+- EPUB output is structurally accessible (language tag, navigation document, one
+  heading per chapter). Accessibility metadata and DAISY Ace checks are planned;
+  see the Accessibility section of `epub-spec.md`.
 
-## EU AI Act — Article 50 (enforceable 2026-08-02)
+## AI scope and disclosure
 
-- Fiction and creative works are explicitly **exempted** from cover-side AI disclosure.
-- Required: non-intrusive backend metadata disclosure only (copyright page or EPUB
-  metadata).
-- Do **not** add cover stamps or visible "AI-assisted" labels — no legal upside, and it
-  harms the work's marketability.
-
-## Retailer AI disclosure (KDP and equivalents)
-
-- The AI scope here is editorial only — analysis, critique, and continuity checking, not
-  generative prose. That scope qualifies for the KDP "AI-assisted" safe harbor.
-- If a generative mode is ever added it must be opt-in and separately disclosed.
+- The AI features are editorial: analysis, critique, continuity checks, metadata
+  suggestions and a chat assistant. None of them writes manuscript prose into the
+  book.
+- If a generative mode is ever added, it must be opt-in and clearly labeled, so
+  authors can meet their retailers' AI-disclosure rules.
+- The app adds no AI labels or stamps to exported books.
 
 ## Author copyright
 
 - Authors retain 100% copyright. The software receives no license of any kind to the
   author's text.
-- Manuscript content may **never** be used for AI training, by this project or by any
-  provider it calls.
+- Manuscript content may **never** be used for AI training by this project.
 
 ## AI privacy — zero retention
 
-- Use zero-retention terms with any AI API provider.
+- AI calls use the user's own API key, or the operator's server key when the
+  operator has configured one. The text goes to that provider under the key
+  owner's terms with the provider.
 - Manuscripts are processed ephemerally: no logging, no caching, discarded after the
   response.
 - **Never** `console.log`, `logger.info`, or otherwise persist manuscript text.
-- Self-hosting the models entirely is the strongest form of this guarantee and is a
-  supported deployment goal.
+- Running the models locally would be the strongest form of this guarantee. It is
+  not supported yet: the provider layer covers Anthropic, OpenAI and Google.

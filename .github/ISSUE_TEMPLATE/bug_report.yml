@@ -55,7 +55,6 @@ body:
         - Docker image, own orchestration
         - bun run dev (local development)
         - Vercel or another Next.js host
-        - The hosted demo
     validations:
       required: true
   - type: textarea

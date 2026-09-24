@@ -1,3 +1,10 @@
+# Dependencies are installed with bun from the committed lockfile; the service
+# itself runs on Node.
+FROM oven/bun:1 AS deps
+WORKDIR /app
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile --production
+
 FROM node:24-slim
 
 # Pandoc builds the EPUB, WeasyPrint renders the PDF; the font packages are
@@ -12,9 +19,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-COPY package.json package-lock.json* ./
-RUN npm install --omit=dev --no-audit --no-fund
-
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 # The `node` user ships with the base image; fontconfig caches under its home.

@@ -14,15 +14,20 @@ There are three of them: royalties, conversion, and AI.
 ```typescript
 interface RoyaltySource {
   retailer: string;
-  fetchRoyalties(dateRange: { start: Date; end: Date }): Promise<RoyaltyRecord[]>;
+  fetchRoyalties(params: {
+    userId: string;
+    dateRange: { start: Date; end: Date };
+  }): Promise<RoyaltyRecord[]>;
   parseReport(file: Buffer, fileName: string): Promise<RoyaltyRecord[]>;
   supportsAutoFetch(): boolean;
 }
 ```
 
-### Registry (`index.ts`)
-- Pre-registers CSV sources for: amazon, apple, kobo, streetlib.
-- `getRoyaltySource(retailer)` — lookup a registered source.
+### Creating a source
+`POST /api/royalties/upload` validates the retailer against
+`SUPPORTED_CSV_RETAILERS` (amazon, apple, kobo, streetlib) and calls
+`createCSVRoyaltySource(retailer, projectId)` for each upload. A source holds the
+project it parses for, so sources are created per request and never shared.
 
 ### Implementations
 

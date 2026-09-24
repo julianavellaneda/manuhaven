@@ -22,7 +22,10 @@ bun run dev
 The README's development quick start lists the exact values for `.env.local`.
 
 **Use `bun` for everything.** Never `npm`, `npx`, or `yarn` — use `bunx` in place of
-`npx`. Mixed lockfiles are the single most common broken PR.
+`npx`. Mixed lockfiles are the single most common broken PR. The converter in
+`services/converter/` runs on Node but has its own `bun.lock` too, so a dependency
+change there is `cd services/converter && bun add …`. CI uses the Bun version pinned
+in the root `package.json` (`packageManager`).
 
 ## Before you open a PR
 

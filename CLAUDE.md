@@ -7,6 +7,9 @@ This version has breaking changes — APIs, conventions, and file structure may 
 # Package Manager
 Always use `bun` for all package management and script commands in this project.
 Never use `npm`, `npx`, or `yarn`. Use `bunx` instead of `npx`.
+This includes `services/converter/`: it runs on Node but its dependencies are
+installed with `bun install` from its own `bun.lock`. `package.json` pins the
+Bun version (`packageManager`), and CI uses the same one.
 
 
 # CLAUDE.md — ManuHaven
