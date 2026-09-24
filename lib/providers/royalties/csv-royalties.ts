@@ -317,12 +317,8 @@ export class CSVRoyaltySource implements RoyaltySource {
   retailer: string;
   private projectId: string;
 
-  constructor(retailer: RetailerKey, projectId: string = "") {
+  constructor(retailer: RetailerKey, projectId: string) {
     this.retailer = retailer;
-    this.projectId = projectId;
-  }
-
-  setProjectId(projectId: string) {
     this.projectId = projectId;
   }
 
@@ -335,7 +331,7 @@ export class CSVRoyaltySource implements RoyaltySource {
   async parseReport(file: Buffer, fileName: string): Promise<RoyaltyRecord[]> {
     if (!this.projectId) {
       throw new Error(
-        "projectId must be set before parsing a report. Call setProjectId() first."
+        "projectId must be set before parsing a report."
       );
     }
     const parser = PARSER_MAP[this.retailer as RetailerKey];

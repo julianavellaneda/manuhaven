@@ -19,7 +19,6 @@ describe("splitIntoChapters — performance", () => {
     const chapters = splitIntoChapters(largeDoc);
     const elapsed = performance.now() - start;
 
-    console.log(`splitIntoChapters: ${elapsed.toFixed(1)}ms`);
     expect(chapters.length).toBeGreaterThan(0);
     expect(elapsed).toBeLessThan(2000);
   });
@@ -33,7 +32,6 @@ describe("splitIntoChapters — performance", () => {
     const chapters = splitIntoChapters(largeDoc);
     const totalWords = chapters.reduce((sum, ch) => sum + ch.wordCount, 0);
 
-    console.log(`Total word count: ${totalWords.toLocaleString()}`);
     expect(totalWords).toBeGreaterThanOrEqual(90_000);
     expect(totalWords).toBeLessThanOrEqual(110_000);
   });
@@ -57,7 +55,6 @@ describe("individual chapter extraction — performance", () => {
     const chapter10 = chapters[9]; // Chapter 10
     const elapsed = performance.now() - start;
 
-    console.log(`Single chapter extraction: ${elapsed.toFixed(1)}ms`);
     expect(chapter10).toBeDefined();
     expect(chapter10.title).toBe("Chapter 10");
     expect(chapter10.wordCount).toBeGreaterThan(0);

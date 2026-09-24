@@ -3,7 +3,6 @@ import {
   createDecipheriv,
   randomBytes,
   scryptSync,
-  timingSafeEqual,
 } from "node:crypto";
 
 /**
@@ -91,11 +90,4 @@ export function keyHint(plain: string): string {
   const prefix =
     dash > 0 && dash <= 8 ? trimmed.slice(0, dash + 1) : trimmed.slice(0, 3);
   return `${prefix}…${tail}`;
-}
-
-/** Constant-time comparison, for callers verifying a key round-tripped. */
-export function keysMatch(a: string, b: string): boolean {
-  const ab = Buffer.from(a, "utf8");
-  const bb = Buffer.from(b, "utf8");
-  return ab.length === bb.length && timingSafeEqual(ab, bb);
 }

@@ -14,7 +14,6 @@ coverage
 # not needed to build or run the app
 docs
 tests
-test-manuscripts
 services/converter
 *.md
 !README.md

@@ -20,7 +20,7 @@ export function formatCurrency(
   }).format(amount);
 }
 
-export function formatDate(date: Date | string, locale = "en-US"): string {
+function formatDate(date: Date | string, locale = "en-US"): string {
   return new Intl.DateTimeFormat(locale, {
     year: "numeric",
     month: "short",

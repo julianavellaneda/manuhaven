@@ -57,7 +57,7 @@ export function parseModelSpec(spec: string): {
 }
 
 /** The server-side env key for a provider, if one is configured. */
-export function serverApiKey(provider: AssistantProvider): string | undefined {
+function serverApiKey(provider: AssistantProvider): string | undefined {
   const value = process.env[PROVIDER_API_KEYS[provider]];
   return value && value.length > 0 ? value : undefined;
 }
@@ -95,7 +95,7 @@ export function resolveLanguageModel(
   };
 }
 
-export interface UserAISettings {
+interface UserAISettings {
   provider: AssistantProvider | null;
   chatModel: string | null;
   utilityModel: string | null;
@@ -108,7 +108,7 @@ export interface UserAISettings {
  *
  * Callers must pass a user id they have already authenticated.
  */
-export async function loadUserAISettings(
+async function loadUserAISettings(
   userId: string
 ): Promise<UserAISettings | null> {
   const data = await getAiSettingsWithCipher(userId);

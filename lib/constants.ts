@@ -9,32 +9,13 @@ export const GENRES = [
 
 export type Genre = (typeof GENRES)[number];
 
-export const PROJECT_STATUSES = [
-  "draft",
-  "formatting",
-  "review",
-  "publishing",
-  "live",
-  "archived",
-] as const;
-
-export type ProjectStatus = (typeof PROJECT_STATUSES)[number];
-
-export const RETAILERS = [
-  "amazon",
-  "apple",
-  "kobo",
-  "bn",
-  "google",
-  "overdrive",
-  "tolino",
-] as const;
-
-export type Retailer = (typeof RETAILERS)[number];
-
-export const EXPORT_FORMATS = ["epub", "pdf"] as const;
-
-export type ExportFormat = (typeof EXPORT_FORMATS)[number];
+export type ProjectStatus =
+  | "draft"
+  | "formatting"
+  | "review"
+  | "publishing"
+  | "live"
+  | "archived";
 
 export const MAX_MANUSCRIPT_SIZE_BYTES = 50 * 1024 * 1024; // 50 MB
 export const MAX_COVER_SIZE_BYTES = 10 * 1024 * 1024; // 10 MB

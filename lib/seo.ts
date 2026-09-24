@@ -36,7 +36,7 @@ export function localizedUrl(locale: string, path: string): string {
  * SEO metadata for a localized page: self-referencing canonical, hreflang
  * alternates (en, es-MX, and x-default → the default-locale URL), and
  * og:locale + alternateLocale. `path` is the canonical path WITHOUT the locale
- * prefix (e.g. "/", "/about", "/pricing").
+ * prefix (e.g. "/", "/about", "/privacy").
  */
 export function localeMetadata(locale: string, path: string): Metadata {
   const languages: Record<string, string> = {};
