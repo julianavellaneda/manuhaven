@@ -1,4 +1,4 @@
-FROM node:24-slim
+FROM node:25-slim
 
 # Pandoc builds the EPUB, WeasyPrint renders the PDF; the font packages are
 # what the genre templates fall back to. curl is used by the healthcheck.
