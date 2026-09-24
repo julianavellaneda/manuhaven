@@ -15,6 +15,15 @@ opens the starter issues. It is idempotent.
 
 Then, by hand in the repository settings:
 
+- **Actions → General → "Allow GitHub Actions to create and approve pull
+  requests"**: on. Without it release-please cannot open its release PR and the
+  Release workflow fails.
+- **GHCR package access**: `ghcr.io/julianavellaneda/manuhaven` and
+  `manuhaven-converter` must be linked to this repository, or grant it **Write**
+  under each package's "Manage Actions access". A package left over from another
+  repository makes "Publish images" fail with `permission_denied`; deleting it
+  lets the next run recreate it. Make both packages public after the first
+  release so `docker compose pull` works without logging in.
 - **Branch protection on `main`**: require the `Lint, types, tests, build`
   check, require a pull request, allow squash merges only.
 - **Description and topics**: `self-hosted`, `nextjs`, `postgres`, `epub`,
@@ -58,8 +67,9 @@ looking at, in order:
 3. **Is it a Server Component?** `"use client"` at the top of a page is almost
    always someone reaching for a hook they could have pushed down into an
    island.
-4. **Row-level security.** A new table without policies is a data leak. A new
-   query using the admin client needs a reason.
+4. **Authorization.** Every query function in `lib/db/queries/` takes `userId`
+   and scopes by it; there is no row-level security behind it. A new function
+   needs a case in `tests/integration/db/authz.test.ts`.
 5. **Scope.** A PR that adds a dependency to solve something small is worth
    pushing back on. So is one that quietly adds prose generation — see
    ROADMAP.md, "Not planned".
@@ -78,10 +88,6 @@ you cannot relicense their work later without asking them.
 - **`AI_KEY_ENCRYPTION_SECRET` rotation** silently invalidates every stored user
   key. The app degrades gracefully (keys read as absent), but users must
   re-enter them. Never rotate it casually on a shared instance.
-- **The public storage buckets** are a considered trade-off for single-author
-  installs, documented in `docs/self-hosting.md`. If anyone reports it as a
-  vulnerability, the answer is the documentation, not a patch — unless they
-  have found an actual policy hole, in which case it is a real one.
 
 ## Security reports
 

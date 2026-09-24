@@ -7,13 +7,12 @@ of truth is `messages/en.json`; `es.json` must mirror its key structure exactly.
 
 - **Target locale:** `es-MX` — Mexican Spanish, written for independent fiction
   authors in Mexico (and broadly Latin America).
-- **Currency:** Mexican peso (MXN), rendered as `MX$1,299.00` (narrow symbol to
-  disambiguate from USD). Decimals use `.`, thousands use `,`. Dates DD/MM/YYYY.
+- **Numbers and dates** are formatted with `Intl` for `es-MX`: decimals use `.`,
+  thousands use `,`, dates are DD/MM/YYYY. Never hand-format them in copy.
 
 ## Tone & register
 
-- **Use `tú` (informal, singular).** Address the author directly and warmly —
-  ManuHaven is a small, founder-built studio, not a faceless corporation.
+- **Use `tú` (informal, singular).** Address the author directly and warmly.
 - **Use `ustedes` for plural.** **Never use `vosotros`** (that is es-ES, wrong
   for Mexico).
 - Keep it concise, encouraging, and professional. Avoid slang and regionalisms
@@ -27,11 +26,8 @@ of truth is `messages/en.json`; `es.json` must mirror its key structure exactly.
 |---|---|---|
 | manuscript | manuscrito | |
 | royalties | regalías | |
-| payout | pago | (a disbursement to the author) |
 | editorial pass / suite | revisión editorial | |
-| story bible | biblia narrativa | |
 | retailer | tienda / minorista | prefer "tienda" for storefronts (Amazon, Apple) |
-| export bundle | paquete de exportación | |
 | cover | portada | |
 | draft | borrador | project status |
 | live (published) | publicado | project status |
@@ -41,8 +37,7 @@ of truth is `messages/en.json`; `es.json` must mirror its key structure exactly.
 ## Brand & untranslated terms
 
 - **"ManuHaven"** — never translate; it is the product name.
-- Format names stay as-is: **EPUB**, **PDF**, **BISAC**, **OXXO**, **SPEI**,
-  **Stripe**, **W-9**.
+- Format names stay as-is: **EPUB**, **PDF**, **DOCX**.
 - Retailer names stay as-is: **Amazon**, **Apple Books**, **Kobo**, **Google
   Play**, etc.
 
@@ -55,6 +50,6 @@ of truth is `messages/en.json`; `es.json` must mirror its key structure exactly.
 
 ## Scope note
 
-This file is the contract handed to translators. The current `es.json` ships
-with **English placeholder values** (scaffold) so the `/es` site renders
-end-to-end; real Spanish copy replaces those values per this guide.
+This file is the contract for anyone editing `es.json`. Every key is translated;
+a new English key needs its Spanish value in the same change, and the parity test
+fails until it has one.
