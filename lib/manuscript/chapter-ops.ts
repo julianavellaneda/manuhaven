@@ -1,6 +1,6 @@
 /**
  * Chapter-ops — pure transforms that mutate the `chapters` array.
- * Editor-aware wiring (setContent, focus) lives in ManuscriptEditor.
+ * Editor-aware wiring (setContent, focus) lives in lib/editor/use-chapter-ops.ts.
  */
 
 import {
