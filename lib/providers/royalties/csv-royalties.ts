@@ -106,19 +106,26 @@ const KDP_MARKETPLACE_MAP: Record<string, string> = {
 // Month helpers
 // ---------------------------------------------------------------------------
 
+// Report dates are calendar dates, so every Date here is UTC midnight and the
+// upload route stores `toISOString()`'s date part. Local-time dates would shift
+// a period into the neighbouring month on servers east or west of UTC.
+
 function firstOfMonth(date: Date): Date {
-  return new Date(date.getFullYear(), date.getMonth(), 1);
+  return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), 1));
 }
 
 function lastOfMonth(date: Date): Date {
-  return new Date(date.getFullYear(), date.getMonth() + 1, 0);
+  return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, 0));
 }
 
-function parseMMDDYYYY(str: string): Date {
+/** Parse a MM/DD/YYYY or YYYY-MM-DD report date as a UTC calendar date. */
+function parseReportDate(str: string): Date {
+  const iso = /^(\d{4})-(\d{2})-(\d{2})$/.exec(str.trim());
+  if (iso) return new Date(Date.UTC(Number(iso[1]), Number(iso[2]) - 1, Number(iso[3])));
   const parts = str.split("/");
   if (parts.length !== 3) return new Date(str);
   const [mm, dd, yyyy] = parts;
-  return new Date(Number(yyyy), Number(mm) - 1, Number(dd));
+  return new Date(Date.UTC(Number(yyyy), Number(mm) - 1, Number(dd)));
 }
 
 // ---------------------------------------------------------------------------
@@ -136,7 +143,7 @@ function parseKDPReport(
 
   for (const row of rows) {
     const dateStr = row["Date"] ?? "";
-    const date = parseMMDDYYYY(dateStr);
+    const date = parseReportDate(dateStr);
     if (isNaN(date.getTime())) continue;
 
     const marketplace = row["Marketplace"] ?? "";
@@ -144,7 +151,7 @@ function parseKDPReport(
     const unitsSold = parseInt(row["Units Sold"] ?? "0", 10) || 0;
     const unitsReturned = parseInt(row["Units Returned"] ?? "0", 10) || 0;
     const revenue = parseFloat(row["Royalty"] ?? "0") || 0;
-    const currency = row["Currency"] ?? "USD";
+    const currency = row["Currency"] || "USD";
 
     records.push({
       retailer: "amazon",
@@ -175,14 +182,14 @@ function parseAppleReport(
   for (const row of rows) {
     const beginDateStr = row["Begin Date"] ?? "";
     const endDateStr = row["End Date"] ?? "";
-    const beginDate = parseMMDDYYYY(beginDateStr);
-    const endDate = parseMMDDYYYY(endDateStr);
+    const beginDate = parseReportDate(beginDateStr);
+    const endDate = parseReportDate(endDateStr);
     if (isNaN(beginDate.getTime()) || isNaN(endDate.getTime())) continue;
 
     const territory = row["Country Code"] ?? "";
     const units = parseInt(row["Units"] ?? "0", 10) || 0;
     const revenue = parseFloat(row["Developer Proceeds"] ?? "0") || 0;
-    const currency = row["Currency of Proceeds"] ?? "USD";
+    const currency = row["Currency of Proceeds"] || "USD";
 
     records.push({
       retailer: "apple",
@@ -212,14 +219,14 @@ function parseKoboReport(
 
   for (const row of rows) {
     const dateStr = row["Date"] ?? "";
-    const date = new Date(dateStr);
+    const date = parseReportDate(dateStr);
     if (isNaN(date.getTime())) continue;
 
     const territory = row["Country"] ?? "";
     const netSold = parseInt(row["Net Sold"] ?? "0", 10) || 0;
     const returns = parseInt(row["Returns"] ?? "0", 10) || 0;
     const revenue = parseFloat(row["Total Earnings"] ?? "0") || 0;
-    const currency = row["Currency"] ?? "USD";
+    const currency = row["Currency"] || "USD";
 
     records.push({
       retailer: "kobo",
@@ -264,10 +271,10 @@ function parseStreetLibReport(
     let date: Date;
     if (periodStr.includes("-")) {
       const [yyyy, mm] = periodStr.split("-");
-      date = new Date(Number(yyyy), Number(mm) - 1, 1);
+      date = new Date(Date.UTC(Number(yyyy), Number(mm) - 1, 1));
     } else if (periodStr.includes("/")) {
       const parts = periodStr.split("/");
-      date = new Date(Number(parts[1]), Number(parts[0]) - 1, 1);
+      date = new Date(Date.UTC(Number(parts[1]), Number(parts[0]) - 1, 1));
     } else {
       date = new Date(periodStr);
     }
@@ -278,7 +285,7 @@ function parseStreetLibReport(
     const territory = row["Territory"] ?? "";
     const quantity = parseInt(row["Quantity"] ?? "0", 10) || 0;
     const revenue = parseFloat(row["Net Revenue"] ?? "0") || 0;
-    const currency = row["Currency"] ?? "EUR";
+    const currency = row["Currency"] || "EUR";
 
     records.push({
       retailer,

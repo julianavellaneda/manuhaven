@@ -16,13 +16,41 @@ interface TiptapNode {
   marks?: TiptapMark[];
 }
 
+const BLOCK_TAGS = new Set([
+  "p",
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "h5",
+  "h6",
+  "blockquote",
+  "ul",
+  "ol",
+  "hr",
+  "div",
+  "section",
+  "article",
+  "main",
+  "header",
+  "footer",
+  "nav",
+]);
+
 function parseInlineNodes(
   element: Node,
   marks: TiptapMark[] = []
 ): TiptapNode[] {
+  return parseInlineList(Array.from(element.childNodes), marks);
+}
+
+function parseInlineList(
+  children: Node[],
+  marks: TiptapMark[] = []
+): TiptapNode[] {
   const nodes: TiptapNode[] = [];
 
-  for (const child of Array.from(element.childNodes)) {
+  for (const child of children) {
     if (child.nodeType === Node.TEXT_NODE) {
       const text = child.textContent ?? "";
       if (text.length > 0) {
@@ -127,27 +155,33 @@ function parseBlockElement(element: HTMLElement): TiptapNode[] {
     }
 
     case "li": {
-      const childNodes = parseChildren(element);
-      // If there are no block-level children, wrap inline content in a paragraph
-      const hasBlock = childNodes.some((n) =>
-        ["paragraph", "heading", "bulletList", "orderedList", "blockquote"].includes(
-          n.type
-        )
-      );
-      if (hasBlock) {
-        nodes.push({ type: "listItem", content: childNodes });
-      } else {
-        const inline = parseInlineNodes(element);
-        nodes.push({
-          type: "listItem",
-          content: [
-            {
-              type: "paragraph",
-              content: inline.length > 0 ? inline : undefined,
-            },
-          ],
-        });
+      // Block children stay blocks; each run of inline content between them
+      // becomes one paragraph, keeping its marks.
+      const content: TiptapNode[] = [];
+      let run: Node[] = [];
+      const flush = () => {
+        const inline = parseInlineList(run);
+        if (inline.some((n) => n.type !== "text" || n.text?.trim())) {
+          content.push({ type: "paragraph", content: inline });
+        }
+        run = [];
+      };
+      for (const child of Array.from(element.childNodes)) {
+        if (
+          child.nodeType === Node.ELEMENT_NODE &&
+          BLOCK_TAGS.has((child as HTMLElement).tagName.toLowerCase())
+        ) {
+          flush();
+          content.push(...parseBlockElement(child as HTMLElement));
+        } else {
+          run.push(child);
+        }
       }
+      flush();
+      nodes.push({
+        type: "listItem",
+        content: content.length > 0 ? content : [{ type: "paragraph" }],
+      });
       break;
     }
 

@@ -23,6 +23,17 @@ function esc(text: string): string {
     .replace(/'/g, "&#39;");
 }
 
+/**
+ * Links survive into the EPUB, so only web, mail and in-book links are kept.
+ * Anything else (`javascript:`, `data:`, `file:`…) becomes an empty href.
+ */
+function safeHref(raw: unknown): string {
+  const href = String(raw ?? "").trim();
+  const scheme = /^([a-z][a-z0-9+.-]*):/i.exec(href)?.[1].toLowerCase();
+  if (scheme && !["http", "https", "mailto"].includes(scheme)) return "";
+  return href;
+}
+
 function renderMarks(
   text: string,
   marks?: { type: string; attrs?: Record<string, unknown> }[]
@@ -43,7 +54,7 @@ function renderMarks(
       case "underline":
         return `<u>${acc}</u>`;
       case "link": {
-        const href = esc(String(mark.attrs?.href ?? ""));
+        const href = esc(safeHref(mark.attrs?.href));
         return `<a href="${href}">${acc}</a>`;
       }
       default:
@@ -107,7 +118,7 @@ function wrapChapters(html: string): string {
   // Split on H1 tags (keep them in the result)
   const parts = html.split(/(?=<h1\s)/);
 
-  if (parts.length <= 1) {
+  if (!parts.some((part) => part.trimStart().startsWith("<h1"))) {
     // No H1 headings — return as-is
     return html;
   }
