@@ -1,0 +1,66 @@
+name: Bug report
+description: Something in the studio behaves incorrectly.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please do not paste manuscript text into an issue. A short invented
+        excerpt that reproduces the problem is always enough.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what you got instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Create a project
+        2. Upload a .docx with …
+        3. Open the editor and …
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which part of the app?
+      options:
+        - Editor / import
+        - AI (editorial, Codex, assistant)
+        - Export (EPUB / PDF)
+        - Royalties
+        - Auth / accounts
+        - Translation (es-MX)
+        - Other / not sure
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: A release tag, an image tag, or a commit SHA.
+      placeholder: v0.1.0 / ghcr.io …:edge / 1f1eb47
+    validations:
+      required: true
+  - type: dropdown
+    id: how-running
+    attributes:
+      label: How are you running it?
+      options:
+        - Docker Compose
+        - Docker image, own orchestration
+        - bun run dev (local development)
+        - Vercel or another Next.js host
+        - The hosted demo
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Browser console or server logs. Redact keys and URLs that identify your project.
+      render: shell

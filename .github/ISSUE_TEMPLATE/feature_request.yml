@@ -1,0 +1,34 @@
+name: Feature request
+description: Suggest something the studio should do.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Check `ROADMAP.md` first — it may already be planned, in which case a
+        comment on the existing issue is more useful than a new one.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: Describe the writing or publishing problem, not the feature.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like it to do?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: How do you handle this today?
+      description: Another tool, a manual workaround, or nothing.
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: I understand distribution, payouts, and store integrations are deliberately out of scope.
+          required: true

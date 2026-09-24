@@ -1,0 +1,10 @@
+Period,ISBN,Title,Store,Territory,Quantity,Net Revenue,Currency
+2026-01,9781234567890,The Winter Garden,Amazon Kindle,US,20,59.80,USD
+2026-01,9781234567890,The Winter Garden,Apple Books,US,15,44.85,USD
+2026-01,9781234567890,The Winter Garden,Kobo,CA,8,23.92,CAD
+2026-01,9781234567890,The Winter Garden,Barnes & Noble,US,6,17.94,USD
+2026-02,9781234567890,The Winter Garden,Amazon Kindle,US,25,74.75,USD
+2026-02,9781234567890,The Winter Garden,Apple Books,GB,10,29.90,GBP
+2026-02,9781234567890,The Winter Garden,Google Play,US,12,35.88,USD
+2026-03,9781234567890,The Winter Garden,Amazon Kindle,DE,9,24.21,EUR
+2026-03,9781234567890,The Winter Garden,Tolino,DE,4,11.96,EUR

@@ -1,0 +1,39 @@
+/* thriller -- EPUB dark mode.
+   Kept out of the main stylesheet because that one is also fed to
+   WeasyPrint for the print PDF, and WeasyPrint 57 accepts only bare
+   media types -- it cannot parse a feature query, so it discards the
+   rule and warns on every export. Paper has no color scheme anyway;
+   only the EPUB path appends this file. */
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1a1a;
+    color: #d4d4d0;
+  }
+
+  .chapter-title {
+    color: #e0e0dc;
+    border-bottom-color: #555555;
+  }
+
+  h2, h3 {
+    color: #c8c8c4;
+  }
+
+  .chapter-opening::first-letter {
+    color: #e0e0dc;
+  }
+
+  blockquote {
+    border-left-color: #555555;
+    color: #aaaaaa;
+  }
+
+  hr.scene-break {
+    background-color: #555555;
+  }
+
+  code {
+    background-color: #2a2a2a;
+  }
+}

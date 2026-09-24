@@ -1,0 +1,71 @@
+# Development services for running the app on the host with `bun run dev`.
+# Standalone (not an override of docker-compose.yml), so it needs no .env.
+#
+#   bun run db:up        # Postgres on 127.0.0.1:5432, Mailpit on :1025/:8025
+#   bun run db:migrate
+#
+# with this in .env.local:
+#   DATABASE_URL=postgres://manuhaven:manuhaven@localhost:5432/manuhaven
+#   SMTP_HOST=localhost
+#   SMTP_PORT=1025
+#
+# Magic-link and password-reset emails then show up at http://localhost:8025.
+#
+# For EPUB/PDF export, also start the converter (builds its image once):
+#
+#   bun run converter:up  # converter on 127.0.0.1:3001
+#
+# with CONVERTER_URL=http://localhost:3001 and CONVERTER_API_KEY=manuhaven-dev
+# in .env.local.
+#
+# The password and converter key are fixed because the ports are bound to
+# loopback only. Never use
+# this file in production.
+
+name: manuhaven-dev
+
+services:
+  db:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: manuhaven
+      POSTGRES_PASSWORD: manuhaven
+      POSTGRES_DB: manuhaven
+    ports:
+      - "127.0.0.1:${DB_PORT:-5432}:5432"
+    volumes:
+      # Postgres 18 keeps PGDATA at /var/lib/postgresql/18/docker.
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U manuhaven -d manuhaven"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  mailpit:
+    image: axllent/mailpit:v1.29
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${MAILPIT_SMTP_PORT:-1025}:1025"
+      - "127.0.0.1:${MAILPIT_UI_PORT:-8025}:8025"
+
+  converter:
+    build: ./services/converter
+    # Opt-in: the image is large, and not every session needs exports.
+    profiles: [converter]
+    restart: unless-stopped
+    environment:
+      CONVERTER_API_KEY: manuhaven-dev
+    ports:
+      - "127.0.0.1:${CONVERTER_PORT:-3001}:3001"
+    volumes:
+      - ./services/converter/templates:/app/templates:ro
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:3001/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  pgdata:

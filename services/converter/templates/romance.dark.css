@@ -1,0 +1,35 @@
+/* romance -- EPUB dark mode.
+   Kept out of the main stylesheet because that one is also fed to
+   WeasyPrint for the print PDF, and WeasyPrint 57 accepts only bare
+   media types -- it cannot parse a feature query, so it discards the
+   rule and warns on every export. Paper has no color scheme anyway;
+   only the EPUB path appends this file. */
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #2a1f14;
+    color: #e8ddd0;
+  }
+
+  .chapter-title,
+  h2, h3 {
+    color: #d4b8a0;
+  }
+
+  .chapter-opening::first-letter {
+    color: #d4b8a0;
+  }
+
+  blockquote {
+    border-left-color: #6a5a4a;
+    color: #c8bdb0;
+  }
+
+  hr.scene-break::after {
+    color: #8a7a6a;
+  }
+
+  code {
+    background-color: #3a2f24;
+  }
+}

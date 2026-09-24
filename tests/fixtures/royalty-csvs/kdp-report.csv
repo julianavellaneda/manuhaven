@@ -1,0 +1,9 @@
+Date,Title,Author,ASIN,Marketplace,Royalty Type,Transaction Type,Units Sold,Units Returned,Net Units Sold,Royalty,Currency
+01/15/2026,The Winter Garden,Elsa Thorne,B0EXAMPLE1,Amazon.com,70% Royalty,Purchase,42,2,40,139.60,USD
+01/15/2026,The Winter Garden,Elsa Thorne,B0EXAMPLE1,Amazon.co.uk,70% Royalty,Purchase,18,1,17,47.60,GBP
+01/15/2026,The Winter Garden,Elsa Thorne,B0EXAMPLE1,Amazon.de,70% Royalty,Purchase,12,0,12,29.88,EUR
+02/15/2026,The Winter Garden,Elsa Thorne,B0EXAMPLE1,Amazon.com,70% Royalty,Purchase,55,3,52,181.99,USD
+02/15/2026,The Winter Garden,Elsa Thorne,B0EXAMPLE1,Amazon.co.uk,70% Royalty,Purchase,22,0,22,61.60,GBP
+02/15/2026,The Winter Garden,Elsa Thorne,B0EXAMPLE1,Amazon.ca,70% Royalty,Purchase,8,1,7,18.90,CAD
+03/15/2026,The Winter Garden,Elsa Thorne,B0EXAMPLE1,Amazon.com,70% Royalty,Purchase,67,4,63,220.50,USD
+03/15/2026,The Winter Garden,Elsa Thorne,B0EXAMPLE1,Amazon.co.jp,70% Royalty,Purchase,5,0,5,1750.00,JPY

@@ -1,0 +1,532 @@
+{
+  "common": {
+    "appName": "ManuHaven",
+    "selfHost": "Self-host it",
+    "viewOnGitHub": "View on GitHub",
+    "changeLanguage": "Change language"
+  },
+  "nav": {
+    "features": "Features",
+    "faq": "FAQ",
+    "about": "About",
+    "contact": "Contact",
+    "terms": "License",
+    "privacy": "Privacy"
+  },
+  "footer": {
+    "copyright": "© {year} ManuHaven. Free software under the AGPL-3.0."
+  },
+  "marketing": {
+    "hero": {
+      "badge": "Open-source writing studio",
+      "title": "The writing studio for novelists that you can actually run yourself.",
+      "subtitle": "Write in the browser, get an AI editor that knows your whole book — using your own API key — export retail-ready EPUB and PDF, and track your royalties. AGPL-licensed, self-hostable, and yours to modify.",
+      "seeHowItWorks": "See how it works",
+      "license": "Free and open source under the AGPL-3.0. No account required to self-host."
+    },
+    "faq": {
+      "heading": "Common questions.",
+      "q1": "Do I need to pay for anything?",
+      "a1": "No. The whole application is AGPL-3.0 licensed and self-hostable. The only thing that costs money is AI inference, and you pay your provider directly with your own API key — nothing routes through us. Everything except the AI features works with no key at all.",
+      "q2": "What do I need to run it?",
+      "a2": "Just Docker. One command starts the app, its Postgres database and the export service on your own machine, with no cloud account of any kind. See the self-hosting guide in the repository for the full walkthrough.",
+      "q3": "What happens to my manuscript when I use the AI features?",
+      "a3": "It is sent to whichever model provider you configured, processed, and discarded. This application never logs, caches, or persists manuscript text sent to an AI API, and never uses it for training. Because you supply your own key, your data relationship is directly with the provider under their terms — read them.",
+      "q4": "Can I use it without any AI at all?",
+      "a4": "Yes, and that is the default. With no API key configured the AI surfaces are simply inert; the editor, importer, formatter, exporter, and royalty tracker all work normally.",
+      "q5": "What does the AGPL mean for me?",
+      "a5": "You can run, study, modify, and share it freely. If you modify it and offer it to others over a network, you must offer them your modified source too. For personal or in-house use there is nothing extra to do.",
+      "q6": "Is it really bilingual?",
+      "a6": "Yes — the entire interface and the editorial AI prompts ship in English and Mexican Spanish, and the two locales are kept at exact key parity. Adding a third locale is a documented contribution path."
+    },
+    "pillars": {
+      "p1Title": "Write",
+      "p1Body": "A real manuscript editor in the browser: chapter navigation, drag-and-drop reordering, split and merge, find and replace, writing stats, and autosave with version history. Import your existing .docx or .txt.",
+      "p2Title": "Analyze",
+      "p2Body": "An AI editor that has read your whole book — editorial reports, style analysis, continuity checks, and a chat assistant grounded in your chapters. Bring your own API key, so the inference bill is yours and the manuscript never touches our servers.",
+      "p3Title": "Format & export",
+      "p3Body": "Genre-matched CSS templates rendered to EPUB 3 and print-ready PDF by a Pandoc + WeasyPrint service you run alongside the app. Accessibility metadata included.",
+      "p4Title": "Track",
+      "p4Body": "Import royalty CSVs from KDP, Apple, Kobo, and StreetLib into one earnings view with per-title revenue charts. No aggregator, no cut, no lock-in."
+    },
+    "about": {
+      "heading": "About ManuHaven",
+      "body": "ManuHaven is an open-source writing studio for novelists: a browser manuscript editor, an AI editor that works from your own API key, EPUB and PDF export, and royalty tracking. It began as a commercial publishing platform and was opened up instead — the publishing business was cut, and the studio is what remained worth keeping. It is AGPL-3.0 licensed, self-hostable, and developed in the open. Contributions and bug reports are welcome on GitHub."
+    },
+    "contact": {
+      "heading": "Contact",
+      "body": "Development happens in the open on GitHub. Open an issue for bugs and feature requests, or start a discussion for self-hosting help and general questions — both get a faster answer than email, and the answer stays useful to the next person. For security reports, please follow the private disclosure process in SECURITY.md rather than filing a public issue."
+    },
+    "privacy": {
+      "heading": "Privacy",
+      "body": "When you self-host ManuHaven, your data lives in your own database and nobody else can see it — there is no telemetry and no phone-home. This notice covers the hosted demo only. The demo stores the account and manuscripts you create so the app can function, and demo accounts are deleted after seven days. AI features require your own API key; manuscript text sent to a model provider is processed and discarded, never logged, never cached, and never used for training. Because the key is yours, your data relationship for that text is directly with the provider under their terms. Optional analytics are disabled unless a PostHog key is configured. When enabled they record only named product events, with no automatic click capture and no session recordings, and never include manuscript content."
+    },
+    "terms": {
+      "heading": "License",
+      "body": "ManuHaven is free software licensed under the GNU Affero General Public License v3.0. You may run, study, modify, and redistribute it. If you modify it and make it available to others over a network, you must also make your modified source available to them. The software is provided without warranty of any kind — see the LICENSE file for the full text, which governs in case of any conflict with this summary."
+    }
+  },
+  "auth": {
+    "pageTitle": "Welcome back",
+    "pageSubtitle": "Sign in to your publishing dashboard",
+    "continueWithGoogle": "Continue with Google",
+    "or": "or",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "••••••••",
+    "signIn": "Sign in",
+    "signingIn": "Signing in…",
+    "sendMagicLink": "Send magic link instead",
+    "checkEmail": "Check your email",
+    "magicLinkSent": "We sent a sign-in link to <strong>{email}</strong>",
+    "signInTab": "Sign in",
+    "signUpTab": "Create account",
+    "nameLabel": "Name",
+    "namePlaceholder": "Jane Austen",
+    "passwordHint": "At least 8 characters.",
+    "createAccount": "Create account",
+    "creatingAccount": "Creating account…",
+    "verificationSent": "We sent a verification link to <strong>{email}</strong>. Open it to finish creating your account.",
+    "forgotPassword": "Forgot password?",
+    "backToSignIn": "Back to sign in",
+    "forgotTitle": "Reset your password",
+    "forgotSubtitle": "We'll email you a link to choose a new password.",
+    "sendResetLink": "Send reset link",
+    "sendingResetLink": "Sending…",
+    "resetLinkSent": "If an account exists for <strong>{email}</strong>, we sent it a password reset link.",
+    "resetTitle": "Choose a new password",
+    "resetSubtitle": "Enter a new password for your account.",
+    "newPasswordLabel": "New password",
+    "confirmPasswordLabel": "Confirm new password",
+    "updatePassword": "Update password",
+    "updatingPassword": "Updating…",
+    "passwordUpdated": "Your password was updated. Sign in with your new password.",
+    "resetLinkInvalid": "This reset link is invalid or has expired.",
+    "requestNewLink": "Request a new link",
+    "errors": {
+      "invalidCredentials": "Incorrect email or password.",
+      "emailNotVerified": "Verify your email address first. Check your inbox for the link.",
+      "userExists": "An account with this email already exists. Sign in instead.",
+      "passwordTooShort": "Your password must be at least 8 characters.",
+      "passwordTooLong": "Your password is too long.",
+      "passwordMismatch": "The passwords don't match.",
+      "invalidLink": "That link is invalid or has expired. Request a new one.",
+      "rateLimited": "Too many attempts. Wait a minute and try again.",
+      "generic": "Something went wrong. Please try again.",
+      "signUpClosed": "New accounts are closed on this server. Ask its owner for an invitation.",
+      "emailRequired": "Enter your email address first."
+    },
+    "errorBoundary": {
+      "title": "Something went wrong",
+      "retry": "Try again"
+    }
+  },
+  "dashboard": {
+    "sidebar": {
+      "projects": "Projects",
+      "library": "Library",
+      "royalties": "Royalties",
+      "reports": "Reports",
+      "settings": "Settings",
+      "newManuscript": "New Manuscript",
+      "close": "Close sidebar",
+      "expand": "Expand sidebar",
+      "collapse": "Collapse sidebar"
+    },
+    "header": {
+      "title": "Your Manuscripts",
+      "projectCount": "{count, plural, one {# active project} other {# active projects}}",
+      "newManuscript": "New Manuscript"
+    },
+    "tabs": {
+      "drafts": "Drafts",
+      "templates": "Templates",
+      "archive": "Archive",
+      "templatesEmpty": "Formatting templates will appear here",
+      "archiveEmpty": "Archived manuscripts will appear here"
+    },
+    "topbar": {
+      "openMenu": "Open menu",
+      "searchPlaceholder": "Search manuscripts..."
+    },
+    "footer": {
+      "copyright": "The Curated ManuHaven",
+      "systemStatus": "System Status",
+      "documentation": "Documentation",
+      "support": "Support"
+    },
+    "newProject": {
+      "title": "New Manuscript",
+      "description": "Start a new project. You can add details and upload your manuscript next.",
+      "labelTitle": "Title",
+      "placeholderTitle": "Enter your manuscript title",
+      "labelGenre": "Genre",
+      "placeholderGenre": "Select a genre",
+      "create": "Create Project",
+      "creating": "Creating...",
+      "errorTitleRequired": "Title is required.",
+      "errorNotLoggedIn": "You must be logged in to create a project.",
+      "errorGeneric": "Something went wrong. Please try again."
+    },
+    "projectCard": {
+      "wordCount": "{count} / {target} words"
+    },
+    "status": {
+      "draft": "Draft",
+      "review": "Review",
+      "formatting": "Formatting",
+      "publishing": "Publishing",
+      "live": "Live",
+      "archived": "Archived"
+    },
+    "kanban": {
+      "draft": "Draft",
+      "formatting": "Formatting",
+      "publishing": "Publishing",
+      "live": "Live",
+      "noProjects": "No projects"
+    },
+    "logout": {
+      "logOut": "Log out",
+      "signingOut": "Signing out…",
+      "failed": "Sign out failed. Please try again."
+    },
+    "deleteAccount": {
+      "trigger": "Delete account",
+      "dialogTitle": "Delete your account?",
+      "dialogDescription": "This permanently removes your profile, projects, manuscripts, exports, royalties, and assistant conversations. This cannot be undone.",
+      "confirmLabel": "Type",
+      "confirm": "Delete account",
+      "deleting": "Deleting…",
+      "errorConfirmPhrase": "Type \"{phrase}\" to confirm.",
+      "errorGeneric": "Failed to delete account"
+    }
+  },
+  "editor": {
+    "noManuscript": {
+      "heading": "No manuscript yet",
+      "body": "Upload a .docx or .txt file to get started, or open a blank editor and start writing {projectTitle}.",
+      "uploadButton": "Upload Manuscript",
+      "creatingButton": "Creating...",
+      "startWritingButton": "Start Writing"
+    },
+    "topBar": {
+      "tab": {
+        "edit": "Edit",
+        "editorial": "Editorial",
+        "preview": "Preview",
+        "royalties": "Royalties"
+      },
+      "previewButton": "Preview"
+    },
+    "chapterNav": {
+      "chaptersOf": "Chapters of",
+      "noChapters": "No chapters found",
+      "addChapter": "Add chapter"
+    },
+    "chapterItem": {
+      "reorderAriaLabel": "Reorder chapter",
+      "reorderTitle": "Drag to reorder",
+      "inconsistencyAriaLabel": "Continuity issue detected",
+      "actionsAriaLabel": "Chapter actions",
+      "rename": "Rename",
+      "splitAtCursor": "Split at cursor",
+      "mergeWithNext": "Merge with next",
+      "deleteChapter": "Delete chapter"
+    },
+    "distractionFree": {
+      "exitButton": "Exit",
+      "exitTitle": "Exit distraction-free (Esc)"
+    },
+    "toolbar": {
+      "bold": "Bold",
+      "italic": "Italic",
+      "underline": "Underline",
+      "strikethrough": "Strikethrough",
+      "inlineCode": "Inline code",
+      "heading1": "Heading 1 (Chapter)",
+      "heading2": "Heading 2",
+      "heading3": "Heading 3",
+      "bulletList": "Bullet list",
+      "numberedList": "Numbered list",
+      "blockquote": "Blockquote",
+      "sceneBreak": "Scene break",
+      "undo": "Undo",
+      "redo": "Redo",
+      "link": "Link",
+      "findReplace": "Find & replace",
+      "writingStats": "Writing stats",
+      "distractionFree": "Distraction-free",
+      "fullBook": "Full Book",
+      "chapters": "Chapters",
+      "statusSaved": "Saved",
+      "statusSaving": "Saving…",
+      "statusUnsaved": "Unsaved changes",
+      "statusError": "Save failed",
+      "savedAgo": "Saved {ago}",
+      "lastSavedTitle": "Last saved {time}",
+      "wordCount": "{count} words"
+    },
+    "findReplace": {
+      "ariaLabel": "Find and replace",
+      "findPlaceholder": "Find",
+      "replacePlaceholder": "Replace with",
+      "matchCaseTitle": "Match case",
+      "prevTitle": "Previous (Shift+Enter)",
+      "nextTitle": "Next (Enter)",
+      "closeTitle": "Close (Esc)",
+      "replaceButton": "Replace",
+      "replaceAllButton": "All",
+      "searchScope": "Searching across the full manuscript."
+    },
+    "linkPopover": {
+      "ariaLabel": "Insert link",
+      "applyButton": "Apply",
+      "clearButton": "Clear",
+      "closeTitle": "Close"
+    },
+    "viewer": {
+      "emptyState": "No manuscript content yet. Upload or paste your text to begin."
+    },
+    "writingStats": {
+      "today": "Today",
+      "sessionWords": "{count} this session",
+      "words": "Words",
+      "characters": "Characters",
+      "readingTime": "Reading time",
+      "readingMinutes": "~{count} min",
+      "dailyGoal": "Daily goal"
+    },
+    "manuscriptEditor": {
+      "deleteDialogTitle": "Delete this chapter?",
+      "deleteDialogDescription": "\"{title}\" and its contents will be removed from the manuscript. This cannot be undone.",
+      "deleteDialogConfirm": "Delete",
+      "splitCursorHint": "Place the cursor where you want the new chapter to begin."
+    },
+    "tiptap": {
+      "placeholder": "Start writing your story..."
+    }
+  },
+  "upload": {
+    "manuscriptLabel": "Manuscript File",
+    "manuscriptDropPrompt": "Drop your manuscript here, or click to browse",
+    "manuscriptHint": ".docx or .txt · up to {max}",
+    "coverLabel": "Cover Image",
+    "coverOptional": "(optional)",
+    "coverDropPrompt": "Drop cover image here",
+    "coverReplace": "Replace cover",
+    "coverHint": ".jpg, .png, or .webp · up to {max}",
+    "coverAlt": "Cover for {projectTitle}",
+    "submitButton": "Upload & Process Manuscript",
+    "submitProcessing": "Processing...",
+    "submitRedirecting": "Redirecting to editor...",
+    "step": {
+      "uploadingManuscript": "Uploading manuscript...",
+      "parsing": "Parsing manuscript...",
+      "uploadingCover": "Uploading cover image...",
+      "done": "Upload complete!",
+      "error": "Upload failed"
+    },
+    "error": {
+      "unsupportedManuscriptType": "Unsupported file type: .{ext}. Please upload a .docx or .txt file.",
+      "manuscriptTooLarge": "File too large ({size}). Maximum size is {max}.",
+      "unsupportedCoverType": "Unsupported image type: .{ext}. Please upload a .jpg, .png, or .webp file.",
+      "coverTooLarge": "Image too large ({size}). Maximum size is {max}.",
+      "uploadFailed": "Upload failed: {detail}",
+      "coverUploadFailed": "Cover upload failed: {detail}",
+      "unexpected": "An unexpected error occurred"
+    }
+  },
+  "pages": {
+    "library": {
+      "heading": "Library",
+      "description": "Your manuscripts, templates, and resources",
+      "emptyHeading": "Your library is being prepared",
+      "emptyBody": "Uploaded manuscripts, saved templates, and reference materials will appear here."
+    },
+    "profile": {
+      "heading": "Profile",
+      "description": "Your account details",
+      "labelDisplayName": "Display name",
+      "labelEmail": "Email",
+      "labelMemberSince": "Member since",
+      "signOutHint": "Signing out will return you to the login screen.",
+      "dangerZoneHeading": "Danger zone",
+      "dangerZoneDescription": "Permanently delete your account and all associated data."
+    },
+    "settings": {
+      "heading": "Settings",
+      "description": "Manage your account and preferences",
+      "linkProfileLabel": "Profile",
+      "linkProfileDescription": "View your account details and sign out",
+      "linkAiLabel": "AI",
+      "linkAiDescription": "Add your own API key and choose which model powers the assistant"
+    },
+    "reports": {
+      "heading": "Reports",
+      "description": "Analytics and insights for your manuscripts",
+      "emptyHeading": "Reports are on the way",
+      "emptyBody": "Sales analytics, readership trends, and performance insights will be available here."
+    },
+    "royalties": {
+      "heading": "Royalties",
+      "description": "Upload sales reports and track your earnings across all retailers"
+    },
+    "projectEditorial": {
+      "backToEditor": "Back to editor",
+      "heading": "Editorial Report"
+    },
+    "projectUpload": {
+      "heading": "Upload Manuscript",
+      "description": "Upload your manuscript and cover image for <strong>{title}</strong>"
+    },
+    "projectRoyalties": {
+      "heading": "Royalties",
+      "description": "Revenue and units sold for {title}"
+    },
+    "settingsAi": {
+      "heading": "AI settings",
+      "description": "Choose which model powers the assistant and editorial tools, and add the API key they run on.",
+      "back": "Back to settings",
+      "providerLabel": "Provider",
+      "providerNone": "No AI",
+      "providerHelp": "Pick who you have an account with. Leaving this on “No AI” turns the AI features off; everything else keeps working.",
+      "providerAnthropic": "Anthropic (Claude)",
+      "providerOpenai": "OpenAI",
+      "providerGoogle": "Google (Gemini)",
+      "keyLabel": "API key",
+      "keyPlaceholder": "Paste your key",
+      "keySet": "Key set",
+      "keyReplace": "Replace key",
+      "keyCancel": "Cancel",
+      "keyClear": "Remove key",
+      "keyHelp": "Your key is encrypted before it is stored and is never sent back to the browser. You are billed directly by your provider.",
+      "chatModelLabel": "Chat model",
+      "utilityModelLabel": "Utility model",
+      "modelPlaceholder": "provider:model-id",
+      "modelHelp": "Optional. Leave blank to use your provider's default. The utility model handles small jobs like naming conversations.",
+      "autonomyLabel": "Assistant autonomy",
+      "autonomyOff": "Off",
+      "autonomyLite": "Lite — answer questions only",
+      "autonomyEditorial": "Editorial — read chapters and the Codex",
+      "autonomyCollaborator": "Collaborator — full tool access",
+      "save": "Save",
+      "saving": "Saving…",
+      "saved": "Settings saved",
+      "test": "Test connection",
+      "testing": "Testing…",
+      "testOk": "Connected to {model}",
+      "testFailed": "Could not connect: {message}",
+      "noSecret": "This deployment cannot store API keys yet. Set AI_KEY_ENCRYPTION_SECRET and restart.",
+      "saveFailed": "Could not save settings"
+    }
+  },
+  "royalties": {
+    "dashboard": {
+      "statTotalRevenue": "Total Revenue",
+      "statUnitsSold": "Units Sold",
+      "statActiveRetailers": "Active Retailers",
+      "statTopTerritory": "Top Territory",
+      "importSalesReport": "Import Sales Report",
+      "labelRetailer": "Retailer",
+      "placeholderRetailer": "Select retailer",
+      "labelProject": "Project",
+      "placeholderProject": "Select project",
+      "dropZonePrompt": "Drag and drop a CSV file, or click to browse",
+      "dropZoneFormats": "Supports KDP, Apple Books, Kobo, and StreetLib formats",
+      "btnParsePreview": "Parse & Preview",
+      "btnImport": "Import",
+      "previewCount": "Preview ({count} records)",
+      "colRetailer": "Retailer",
+      "colTerritory": "Territory",
+      "colUnits": "Units",
+      "colRevenue": "Revenue",
+      "colUsd": "USD",
+      "colPeriod": "Period",
+      "chartRevenueByRetailer": "Revenue by Retailer",
+      "chartRevenueByTerritory": "Revenue by Territory",
+      "noTerritoryData": "No territory data yet",
+      "chartUnitsSoldOverTime": "Units Sold Over Time",
+      "tooltipRevenue": "Revenue",
+      "tooltipUnitsSold": "Units Sold"
+    },
+    "retailerMix": {
+      "title": "Retailer Mix",
+      "tooltipRevenue": "Revenue"
+    },
+    "revenueChart": {
+      "title": "Revenue Performance",
+      "tooltipRevenue": "Revenue"
+    },
+    "revenueHero": {
+      "totalRevenue": "Total Revenue",
+      "thisMonth": "This Month",
+      "unitsSold": "Units Sold"
+    }
+  },
+  "assistant": {
+    "brandName": "Assistant",
+    "rail": {
+      "assistant": "Assistant"
+    },
+    "panel": {
+      "newConversation": "New conversation",
+      "conversations": "Conversations",
+      "untitled": "Untitled conversation",
+      "greetingTitle": "Ask about your book",
+      "greetingBody": "I've read your manuscript. Ask me about characters, continuity, or where you left a thread — I'll check the pages before I answer.",
+      "placeholder": "Ask about your book…",
+      "send": "Send",
+      "thinking": "Thinking…",
+      "dismissError": "Dismiss"
+    },
+    "tools": {
+      "read_chapter": "Read chapter {index}",
+      "query_codex": "Checked the Codex"
+    },
+    "errors": {
+      "generic": "Something went wrong. Please try again.",
+      "rate_limited": "A quick pause — you're sending messages faster than I can read them. Try again in a moment.",
+      "no_manuscript": "Upload a manuscript to start chatting about it.",
+      "no_ai_key": "No API key configured yet. Add one in Settings → AI to turn the assistant on."
+    },
+    "noKey": {
+      "title": "Add an API key to enable the assistant",
+      "body": "The assistant reads your chapters before it answers, using a model you supply the key for. You are billed by your provider directly — nothing runs through this app.",
+      "cta": "Open AI settings"
+    },
+    "codex": {
+      "tabChat": "Chat",
+      "tabCodex": "Codex",
+      "generate": "Build Codex",
+      "refresh": "Refresh",
+      "analyzing": "Analyzing…",
+      "intro": "Scans your manuscript to track every character, location, and timeline beat — and flags continuity errors.",
+      "inconsistencies": "Inconsistencies ({count})",
+      "noInconsistencies": "No inconsistencies detected.",
+      "characters": "Characters ({count})",
+      "locations": "Locations ({count})",
+      "timeline": "Timeline ({count})",
+      "none": "None found.",
+      "chapter": "Ch. {n}",
+      "aliases": "Also known as {list}",
+      "firstMention": "(ch. {n})",
+      "failed": "Could not build the Codex. Please try again."
+    }
+  },
+  "email": {
+    "magicLink": {
+      "subject": "Your ManuHaven sign-in link",
+      "body": "Use this link to sign in to ManuHaven:\n\n{url}\n\nThe link expires in 5 minutes and works once. If you didn't ask for it, you can ignore this email."
+    },
+    "resetPassword": {
+      "subject": "Reset your ManuHaven password",
+      "body": "Use this link to choose a new ManuHaven password:\n\n{url}\n\nThe link expires in 1 hour. If you didn't ask for it, you can ignore this email and your password stays the same."
+    },
+    "verifyEmail": {
+      "subject": "Verify your ManuHaven email address",
+      "body": "Use this link to verify your email address and finish creating your ManuHaven account:\n\n{url}\n\nIf you didn't create an account, you can ignore this email."
+    }
+  }
+}

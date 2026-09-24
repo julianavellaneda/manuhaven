@@ -1,0 +1,141 @@
+/* romance.css — Warm, elegant template for romance novels */
+/* No @import: conversion runs offline in a container, so a remote
+   font request is silently dropped. The stacks below fall back to
+   fonts shipped in the image (see the Dockerfile's fonts-* packages). */
+
+body {
+  font-family: 'Libre Baskerville', 'Georgia', serif;
+  font-size: 11pt;
+  line-height: 1.8;
+  color: #3a2a1a;
+  background-color: #faf5f0;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Chapter Structure --- */
+
+section.chapter {
+  page-break-before: always;
+}
+
+.chapter-title {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 2em;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 3em;
+  margin-bottom: 1.5em;
+  color: #5a3a2a;
+  letter-spacing: 0.02em;
+}
+
+/* --- Drop Cap --- */
+
+.chapter-opening {
+  text-indent: 0;
+}
+
+.chapter-opening::first-letter {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 3.2em;
+  float: left;
+  line-height: 1;
+  margin-right: 0.1em;
+  margin-top: 0.05em;
+  color: #5a3a2a;
+  font-weight: 700;
+}
+
+/* --- Paragraphs --- */
+
+p {
+  margin: 0;
+  text-indent: 1.25em;
+  text-align: justify;
+  orphans: 2;
+  widows: 2;
+}
+
+p + p {
+  margin-top: 0;
+}
+
+/* --- Scene Breaks --- */
+
+hr.scene-break {
+  border: none;
+  text-align: center;
+  margin: 1.5em 0;
+  height: auto;
+}
+
+hr.scene-break::after {
+  content: "\2726  \2726  \2726";
+  display: block;
+  font-size: 0.9em;
+  color: #a0806a;
+  letter-spacing: 0.5em;
+}
+
+/* --- Blockquotes --- */
+
+blockquote {
+  font-style: italic;
+  margin: 1.2em 2em;
+  padding-left: 1em;
+  border-left: 3px solid #d4b8a0;
+  color: #5a4a3a;
+}
+
+blockquote p {
+  text-indent: 0;
+}
+
+/* --- Headings --- */
+
+h2 {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 1.4em;
+  font-weight: 700;
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+  color: #5a3a2a;
+}
+
+h3 {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 1.2em;
+  font-weight: 400;
+  font-style: italic;
+  margin-top: 1.2em;
+  margin-bottom: 0.6em;
+  color: #5a3a2a;
+}
+
+/* --- Lists --- */
+
+ul, ol {
+  margin: 0.8em 0;
+  padding-left: 2em;
+}
+
+li {
+  margin-bottom: 0.3em;
+}
+
+/* --- Inline Styles --- */
+
+a {
+  color: #5a3a2a;
+  text-decoration: underline;
+}
+
+code {
+  font-family: monospace;
+  font-size: 0.9em;
+  background-color: #f0e8e0;
+  padding: 0.1em 0.3em;
+  border-radius: 2px;
+}
+

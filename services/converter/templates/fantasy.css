@@ -1,0 +1,146 @@
+/* fantasy.css — Rich, immersive template for fantasy novels */
+/* No @import: conversion runs offline in a container, so a remote
+   font request is silently dropped. The stacks below fall back to
+   fonts shipped in the image (see the Dockerfile's fonts-* packages). */
+
+body {
+  font-family: 'Crimson Text', 'Georgia', serif;
+  font-size: 11pt;
+  line-height: 1.75;
+  color: #2a1f14;
+  background-color: #f8f0e3;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Chapter Structure --- */
+
+section.chapter {
+  page-break-before: always;
+}
+
+.chapter-title {
+  font-family: 'Cinzel', 'Georgia', serif;
+  font-size: 1.8em;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-top: 3em;
+  margin-bottom: 1.5em;
+  color: #4a3520;
+}
+
+/* --- Drop Cap --- */
+
+.chapter-opening {
+  text-indent: 0;
+}
+
+.chapter-opening::first-letter {
+  font-family: 'Cinzel', 'Georgia', serif;
+  font-size: 3.2em;
+  float: left;
+  line-height: 1;
+  margin-right: 0.1em;
+  margin-top: 0.05em;
+  color: #6a4a30;
+  font-weight: 700;
+}
+
+/* --- Paragraphs --- */
+
+p {
+  margin: 0;
+  text-indent: 1.25em;
+  text-align: justify;
+  orphans: 2;
+  widows: 2;
+}
+
+p + p {
+  margin-top: 0;
+}
+
+/* --- Scene Breaks --- */
+
+hr.scene-break {
+  border: none;
+  text-align: center;
+  margin: 1.5em 0;
+  height: auto;
+}
+
+hr.scene-break::after {
+  content: "\2042";
+  display: block;
+  font-size: 1.4em;
+  color: #8a6a50;
+  letter-spacing: 0.3em;
+}
+
+/* --- Blockquotes --- */
+
+blockquote {
+  font-style: italic;
+  margin: 1.2em 2em;
+  padding-left: 1em;
+  border-left: 3px solid #c4a880;
+  color: #4a3a28;
+}
+
+blockquote p {
+  text-indent: 0;
+}
+
+/* --- Headings --- */
+
+h2 {
+  font-family: 'Cinzel', 'Georgia', serif;
+  font-size: 1.3em;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+  color: #4a3520;
+}
+
+h3 {
+  font-family: 'Cinzel', 'Georgia', serif;
+  font-size: 1.1em;
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: 0.05em;
+  margin-top: 1.2em;
+  margin-bottom: 0.6em;
+  color: #5a4530;
+}
+
+/* --- Lists --- */
+
+ul, ol {
+  margin: 0.8em 0;
+  padding-left: 2em;
+}
+
+li {
+  margin-bottom: 0.3em;
+}
+
+/* --- Inline Styles --- */
+
+a {
+  color: #4a3520;
+  text-decoration: underline;
+}
+
+code {
+  font-family: monospace;
+  font-size: 0.9em;
+  background-color: #efe5d8;
+  padding: 0.1em 0.3em;
+  border-radius: 2px;
+}
+

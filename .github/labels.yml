@@ -1,0 +1,56 @@
+# Applied with scripts/gh-bootstrap.sh. Colours follow the "Editorial Calm"
+# palette in docs/platform/design-system.md: type labels warm, area labels
+# muted, status labels grey.
+
+- name: bug
+  color: "b23a48"
+  description: Something behaves incorrectly
+- name: enhancement
+  color: "3d5a80"
+  description: A new capability or an improvement to one
+- name: documentation
+  color: "6b705c"
+  description: README, docs/, or in-app copy
+- name: question
+  color: "8d99ae"
+  description: A question rather than a defect
+
+- name: good first issue
+  color: "2a9d8f"
+  description: Small, well-defined, and a reasonable first contribution
+- name: help wanted
+  color: "2a9d8f"
+  description: The maintainer would welcome someone picking this up
+
+- name: "area:editor"
+  color: "e0e1dd"
+  description: Tiptap editor, chapters, import
+- name: "area:ai"
+  color: "e0e1dd"
+  description: Editorial, Codex, assistant, providers
+- name: "area:export"
+  color: "e0e1dd"
+  description: EPUB, PDF, templates, the converter service
+- name: "area:royalties"
+  color: "e0e1dd"
+  description: CSV import and revenue reporting
+- name: "area:i18n"
+  color: "e0e1dd"
+  description: Translations and locale handling
+- name: "area:auth"
+  color: "e0e1dd"
+  description: Accounts, sessions, access control
+
+- name: self-hosting
+  color: "457b9d"
+  description: Running your own instance -- Docker, Postgres, deployment
+- name: security
+  color: "b23a48"
+  description: Security-relevant; see SECURITY.md before posting details
+
+- name: blocked
+  color: "6c757d"
+  description: Waiting on something else
+- name: wontfix
+  color: "6c757d"
+  description: Deliberately out of scope -- see ROADMAP.md

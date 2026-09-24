@@ -1,0 +1,42 @@
+name: Self-hosting help
+description: You are trying to run your own instance and something is not working.
+labels: ["self-hosting", "question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        `docs/self-hosting.md` covers the usual causes. If it did not help,
+        that is worth knowing too — say which part was unclear.
+  - type: textarea
+    id: stuck
+    attributes:
+      label: Where are you stuck?
+    validations:
+      required: true
+  - type: dropdown
+    id: setup
+    attributes:
+      label: Setup
+      options:
+        - Docker Compose (docker-compose.yml)
+        - Docker Compose with S3 storage
+        - Another Node or container host
+        - Local development (bun run dev)
+        - Something else
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: What have you checked?
+      options:
+        - label: "`/api/health` returns `{\"status\":\"ok\"}`"
+        - label: The converter's `/health` reports pandoc and weasyprint as installed
+        - label: "`docker compose logs app` shows `[migrate] database is up to date`"
+        - label: "`NEXT_PUBLIC_APP_URL` matches the address in my browser exactly"
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Redact keys, tokens, passwords, and your domain if you like.
+      render: shell

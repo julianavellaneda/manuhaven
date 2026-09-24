@@ -1,0 +1,82 @@
+# ManuHaven — app + Postgres + EPUB/PDF converter.
+#
+#   cp .env.example .env     # fill in POSTGRES_PASSWORD, BETTER_AUTH_SECRET, CONVERTER_API_KEY
+#   docker compose up --build
+#
+# The app applies database migrations (drizzle/) on start and keeps uploaded
+# files and exports in the `files` volume. Only the app publishes a port.
+#
+# For day-to-day development you usually want the app on the host and only the
+# services in Docker: see compose.dev.yml.
+
+name: manuhaven
+
+services:
+  app:
+    build: .
+    image: ghcr.io/julianavellaneda/manuhaven:latest
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    env_file: .env
+    environment:
+      # Reach the converter and the database over the compose network.
+      CONVERTER_URL: http://converter:3001
+      DATABASE_URL: postgres://manuhaven:${POSTGRES_PASSWORD}@db:5432/manuhaven
+      # Pinned to the volume below, whatever .env says.
+      STORAGE_DIR: /data/files
+    volumes:
+      # Manuscripts, covers and exports (STORAGE_DRIVER=fs, the default). Back it up
+      # together with the database.
+      - files:/data/files
+    depends_on:
+      db:
+        condition: service_healthy
+      converter:
+        condition: service_healthy
+
+  db:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    # No published port: only the app reaches the database. For host-side
+    # development use `bun run db:up` (compose.dev.yml) instead.
+    environment:
+      POSTGRES_USER: manuhaven
+      POSTGRES_DB: manuhaven
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+    volumes:
+      # Postgres 18 images keep PGDATA at /var/lib/postgresql/18/docker, so the
+      # volume is mounted one level up (not at .../data).
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U manuhaven -d manuhaven"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  converter:
+    build: ./services/converter
+    image: ghcr.io/julianavellaneda/manuhaven-converter:latest
+    restart: unless-stopped
+    # No published port and no .env: the converter is reachable only from the
+    # app over the compose network, and the shared key is the one secret it
+    # holds. It never touches the database or storage.
+    environment:
+      CONVERTER_API_KEY: ${CONVERTER_API_KEY:?set CONVERTER_API_KEY in .env}
+    volumes:
+      # Genre CSS templates, editable without a rebuild.
+      - ./services/converter/templates:/app/templates:ro
+      # WeasyPrint/fontconfig cache: keeps PDF renders fast across restarts.
+      - converter-fontcache:/home/node/.cache/fontconfig
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+volumes:
+  pgdata:
+  files:
+  converter-fontcache:

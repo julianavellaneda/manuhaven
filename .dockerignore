@@ -1,0 +1,23 @@
+node_modules
+.next
+.git
+.github
+.claude
+.vercel
+coverage
+
+# env files -- never bake secrets into an image
+.env
+.env.*
+!.env.example
+
+# not needed to build or run the app
+docs
+tests
+test-manuscripts
+services/converter
+*.md
+!README.md
+*-plan.md
+.DS_Store
+*.tsbuildinfo

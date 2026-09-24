@@ -1,0 +1,144 @@
+/* literary.css — Understated, classic template for literary fiction */
+/* No @import: conversion runs offline in a container, so a remote
+   font request is silently dropped. The stacks below fall back to
+   fonts shipped in the image (see the Dockerfile's fonts-* packages). */
+
+body {
+  font-family: 'EB Garamond', 'Georgia', serif;
+  font-size: 11.5pt;
+  line-height: 1.75;
+  color: #333333;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Chapter Structure --- */
+
+section.chapter {
+  page-break-before: always;
+}
+
+.chapter-title {
+  font-family: 'EB Garamond', 'Georgia', serif;
+  font-size: 1.8em;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 4em;
+  margin-bottom: 2em;
+  color: #333333;
+  letter-spacing: 0.05em;
+}
+
+/* --- Drop Cap --- */
+
+.chapter-opening {
+  text-indent: 0;
+}
+
+.chapter-opening::first-letter {
+  font-family: 'EB Garamond', 'Georgia', serif;
+  font-size: 3.2em;
+  float: left;
+  line-height: 1;
+  margin-right: 0.1em;
+  margin-top: 0.05em;
+  color: #333333;
+  font-weight: 500;
+}
+
+/* --- Paragraphs --- */
+
+p {
+  margin: 0;
+  text-indent: 1.5em;
+  text-align: justify;
+  orphans: 2;
+  widows: 2;
+}
+
+p + p {
+  margin-top: 0;
+}
+
+/* --- Scene Breaks --- */
+
+hr.scene-break {
+  border: none;
+  text-align: center;
+  margin: 2em 0;
+  height: auto;
+}
+
+hr.scene-break::after {
+  content: "\2022  \2022  \2022";
+  display: block;
+  font-size: 0.8em;
+  color: #888888;
+  letter-spacing: 0.5em;
+}
+
+/* --- Blockquotes --- */
+
+blockquote {
+  font-style: italic;
+  margin: 1.2em 2.5em;
+  padding: 0;
+  border: none;
+  color: #555555;
+}
+
+blockquote p {
+  text-indent: 0;
+}
+
+/* --- Headings --- */
+
+h2 {
+  font-family: 'EB Garamond', 'Georgia', serif;
+  font-size: 1.3em;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  color: #333333;
+  letter-spacing: 0.03em;
+}
+
+h3 {
+  font-family: 'EB Garamond', 'Georgia', serif;
+  font-size: 1.1em;
+  font-weight: 400;
+  font-style: italic;
+  text-align: center;
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+  color: #555555;
+}
+
+/* --- Lists --- */
+
+ul, ol {
+  margin: 0.8em 0;
+  padding-left: 2em;
+}
+
+li {
+  margin-bottom: 0.3em;
+}
+
+/* --- Inline Styles --- */
+
+a {
+  color: #333333;
+  text-decoration: underline;
+}
+
+code {
+  font-family: monospace;
+  font-size: 0.9em;
+  background-color: #f0f0f0;
+  padding: 0.1em 0.3em;
+  border-radius: 2px;
+}
+

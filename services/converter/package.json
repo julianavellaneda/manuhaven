@@ -1,0 +1,16 @@
+{
+  "name": "manuhaven-converter",
+  "version": "1.0.0",
+  "description": "EPUB/PDF conversion microservice for ManuHaven editorial platform",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

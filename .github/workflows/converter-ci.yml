@@ -1,0 +1,33 @@
+name: Converter
+
+on:
+  pull_request:
+    paths:
+      - "services/converter/**"
+      - "tests/integration/convert.sh"
+      - ".github/workflows/converter-ci.yml"
+  push:
+    branches: [main]
+    paths:
+      - "services/converter/**"
+      - "tests/integration/convert.sh"
+  schedule:
+    # Pandoc and WeasyPrint come from Debian, so the output can drift without
+    # anything in this repo changing. Catch that weekly.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  epub:
+    name: DOCX -> EPUB -> epubcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      # Builds the converter image, converts a fixture, and validates the EPUB.
+      - run: tests/integration/convert.sh

@@ -1,0 +1,532 @@
+{
+  "common": {
+    "appName": "ManuHaven",
+    "selfHost": "Instálalo tú",
+    "viewOnGitHub": "Ver en GitHub",
+    "changeLanguage": "Cambiar idioma"
+  },
+  "nav": {
+    "features": "Funciones",
+    "faq": "Preguntas",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "terms": "Licencia",
+    "privacy": "Privacidad"
+  },
+  "footer": {
+    "copyright": "© {year} ManuHaven. Software libre bajo la AGPL-3.0."
+  },
+  "marketing": {
+    "hero": {
+      "badge": "Estudio de escritura de código abierto",
+      "title": "El estudio de escritura para novelistas que sí puedes alojar tú mismo.",
+      "subtitle": "Escribe en el navegador, usa un editor con IA que conoce tu libro completo —con tu propia clave de API—, exporta EPUB y PDF listos para vender y da seguimiento a tus regalías. Con licencia AGPL, autoalojable y tuyo para modificar.",
+      "seeHowItWorks": "Cómo funciona",
+      "license": "Software libre bajo la AGPL-3.0. No necesitas cuenta para instalarlo tú."
+    },
+    "faq": {
+      "heading": "Preguntas frecuentes.",
+      "q1": "¿Tengo que pagar algo?",
+      "a1": "No. Toda la aplicación tiene licencia AGPL-3.0 y puedes alojarla tú. Lo único que cuesta es la inferencia de IA, y le pagas directamente a tu proveedor con tu propia clave de API; nada pasa por nosotros. Todo lo demás funciona sin ninguna clave.",
+      "q2": "¿Qué necesito para ejecutarlo?",
+      "a2": "Solo Docker. Un comando inicia la aplicación, su base de datos Postgres y el servicio de exportación en tu propia máquina, sin ninguna cuenta en la nube. La guía de instalación del repositorio explica el proceso completo.",
+      "q3": "¿Qué pasa con mi manuscrito cuando uso las funciones de IA?",
+      "a3": "Se envía al proveedor de modelos que hayas configurado, se procesa y se descarta. Esta aplicación nunca registra, almacena en caché ni conserva el texto del manuscrito enviado a una API de IA, y nunca lo usa para entrenar. Como tú pones la clave, tu relación de datos es directamente con el proveedor bajo sus términos: léelos.",
+      "q4": "¿Puedo usarlo sin IA?",
+      "a4": "Sí, y así viene de fábrica. Sin clave de API configurada, las funciones de IA simplemente quedan inactivas; el editor, el importador, el formateador, la exportación y el seguimiento de regalías funcionan con normalidad.",
+      "q5": "¿Qué implica la AGPL para mí?",
+      "a5": "Puedes ejecutarlo, estudiarlo, modificarlo y compartirlo libremente. Si lo modificas y se lo ofreces a otras personas por red, también debes ofrecerles tu código modificado. Para uso personal o interno no tienes que hacer nada más.",
+      "q6": "¿De verdad es bilingüe?",
+      "a6": "Sí: toda la interfaz y las indicaciones de la IA editorial se publican en inglés y en español de México, y ambos idiomas se mantienen con exactamente las mismas claves. Agregar un tercer idioma es una vía de contribución documentada."
+    },
+    "pillars": {
+      "p1Title": "Escribe",
+      "p1Body": "Un editor de manuscritos de verdad en el navegador: navegación por capítulos, reordenamiento arrastrando, dividir y unir, buscar y reemplazar, estadísticas de escritura y guardado automático con historial de versiones. Importa tus archivos .docx o .txt.",
+      "p2Title": "Analiza",
+      "p2Body": "Un editor con IA que ha leído tu libro completo: informes editoriales, análisis de estilo, revisión de continuidad y un asistente de chat fundamentado en tus capítulos. Usa tu propia clave de API: la cuenta del modelo es tuya y el manuscrito nunca pasa por nuestros servidores.",
+      "p3Title": "Formatea y exporta",
+      "p3Body": "Plantillas CSS por género convertidas a EPUB 3 y PDF listo para imprenta mediante un servicio de Pandoc y WeasyPrint que ejecutas junto a la aplicación. Incluye metadatos de accesibilidad.",
+      "p4Title": "Da seguimiento",
+      "p4Body": "Importa los CSV de regalías de KDP, Apple, Kobo y StreetLib en una sola vista de ingresos con gráficas por título. Sin agregador, sin comisión, sin ataduras."
+    },
+    "about": {
+      "heading": "Acerca de ManuHaven",
+      "body": "ManuHaven es un estudio de escritura de código abierto para novelistas: un editor de manuscritos en el navegador, un editor con IA que funciona con tu propia clave de API, exportación a EPUB y PDF, y seguimiento de regalías. Nació como una plataforma comercial de publicación y en su lugar se liberó: se eliminó el negocio editorial y quedó el estudio, que era lo que valía la pena conservar. Tiene licencia AGPL-3.0, puedes alojarlo tú y se desarrolla de forma abierta. Las contribuciones y los reportes de errores son bienvenidos en GitHub."
+    },
+    "contact": {
+      "heading": "Contacto",
+      "body": "El desarrollo ocurre de forma abierta en GitHub. Abre un issue para errores y solicitudes de funciones, o inicia una discusión para dudas de instalación y preguntas generales: ambos reciben respuesta más rápido que un correo, y la respuesta le sirve a quien venga después. Para reportes de seguridad, sigue el proceso de divulgación privada descrito en SECURITY.md en lugar de abrir un issue público."
+    },
+    "privacy": {
+      "heading": "Privacidad",
+      "body": "Cuando alojas ManuHaven tú mismo, tus datos viven en tu propia base de datos y nadie más puede verlos: no hay telemetría ni comunicación de vuelta. Este aviso cubre únicamente la demo alojada. La demo guarda la cuenta y los manuscritos que crees para que la aplicación funcione, y las cuentas de demostración se eliminan a los siete días. Las funciones de IA requieren tu propia clave de API; el texto del manuscrito enviado a un proveedor de modelos se procesa y se descarta, nunca se registra, nunca se almacena en caché y nunca se usa para entrenar. Como la clave es tuya, tu relación de datos por ese texto es directamente con el proveedor bajo sus términos. La analítica opcional está desactivada salvo que se configure una clave de PostHog. Si se activa, solo registra eventos de producto con nombre, sin captura automática de clics ni grabación de sesiones, y nunca incluye el contenido del manuscrito."
+    },
+    "terms": {
+      "heading": "Licencia",
+      "body": "ManuHaven es software libre con licencia GNU Affero General Public License v3.0. Puedes ejecutarlo, estudiarlo, modificarlo y redistribuirlo. Si lo modificas y lo pones a disposición de otras personas por red, también debes poner a su disposición tu código modificado. El software se entrega sin garantía de ningún tipo; consulta el archivo LICENSE para ver el texto completo, que prevalece ante cualquier discrepancia con este resumen."
+    }
+  },
+  "auth": {
+    "pageTitle": "Bienvenido de vuelta",
+    "pageSubtitle": "Inicia sesión en tu panel de publicación",
+    "continueWithGoogle": "Continuar con Google",
+    "or": "o",
+    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "tú@ejemplo.com",
+    "passwordLabel": "Contraseña",
+    "passwordPlaceholder": "••••••••",
+    "signIn": "Iniciar sesión",
+    "signingIn": "Iniciando sesión…",
+    "sendMagicLink": "Enviar enlace mágico en su lugar",
+    "checkEmail": "Revisa tu correo",
+    "magicLinkSent": "Enviamos un enlace de inicio de sesión a <strong>{email}</strong>",
+    "signInTab": "Iniciar sesión",
+    "signUpTab": "Crear cuenta",
+    "nameLabel": "Nombre",
+    "namePlaceholder": "Rosario Castellanos",
+    "passwordHint": "Al menos 8 caracteres.",
+    "createAccount": "Crear cuenta",
+    "creatingAccount": "Creando cuenta…",
+    "verificationSent": "Enviamos un enlace de verificación a <strong>{email}</strong>. Ábrelo para terminar de crear tu cuenta.",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "backToSignIn": "Volver a iniciar sesión",
+    "forgotTitle": "Restablece tu contraseña",
+    "forgotSubtitle": "Te enviaremos un enlace para elegir una contraseña nueva.",
+    "sendResetLink": "Enviar enlace",
+    "sendingResetLink": "Enviando…",
+    "resetLinkSent": "Si existe una cuenta para <strong>{email}</strong>, le enviamos un enlace para restablecer la contraseña.",
+    "resetTitle": "Elige una contraseña nueva",
+    "resetSubtitle": "Escribe una contraseña nueva para tu cuenta.",
+    "newPasswordLabel": "Contraseña nueva",
+    "confirmPasswordLabel": "Confirma la contraseña nueva",
+    "updatePassword": "Actualizar contraseña",
+    "updatingPassword": "Actualizando…",
+    "passwordUpdated": "Tu contraseña se actualizó. Inicia sesión con la nueva.",
+    "resetLinkInvalid": "Este enlace para restablecer la contraseña no es válido o ya expiró.",
+    "requestNewLink": "Solicitar un enlace nuevo",
+    "errors": {
+      "invalidCredentials": "Correo o contraseña incorrectos.",
+      "emailNotVerified": "Primero verifica tu correo. Busca el enlace en tu bandeja de entrada.",
+      "userExists": "Ya existe una cuenta con este correo. Inicia sesión.",
+      "passwordTooShort": "Tu contraseña debe tener al menos 8 caracteres.",
+      "passwordTooLong": "Tu contraseña es demasiado larga.",
+      "passwordMismatch": "Las contraseñas no coinciden.",
+      "invalidLink": "Ese enlace no es válido o ya expiró. Solicita uno nuevo.",
+      "rateLimited": "Demasiados intentos. Espera un minuto y vuelve a intentarlo.",
+      "generic": "Algo salió mal. Inténtalo de nuevo.",
+      "signUpClosed": "Este servidor no acepta cuentas nuevas. Pide una invitación a quien lo administra.",
+      "emailRequired": "Ingresa primero tu correo electrónico."
+    },
+    "errorBoundary": {
+      "title": "Algo salió mal",
+      "retry": "Intentar de nuevo"
+    }
+  },
+  "dashboard": {
+    "sidebar": {
+      "projects": "Proyectos",
+      "library": "Biblioteca",
+      "royalties": "Regalías",
+      "reports": "Informes",
+      "settings": "Ajustes",
+      "newManuscript": "Nuevo manuscrito",
+      "close": "Cerrar barra lateral",
+      "expand": "Expandir barra lateral",
+      "collapse": "Contraer barra lateral"
+    },
+    "header": {
+      "title": "Tus manuscritos",
+      "projectCount": "{count, plural, one {# proyecto activo} other {# proyectos activos}}",
+      "newManuscript": "Nuevo manuscrito"
+    },
+    "tabs": {
+      "drafts": "Borradores",
+      "templates": "Plantillas",
+      "archive": "Archivo",
+      "templatesEmpty": "Las plantillas de formato aparecerán aquí",
+      "archiveEmpty": "Los manuscritos archivados aparecerán aquí"
+    },
+    "topbar": {
+      "openMenu": "Abrir menú",
+      "searchPlaceholder": "Buscar manuscritos..."
+    },
+    "footer": {
+      "copyright": "ManuHaven, edición curada",
+      "systemStatus": "Estado del sistema",
+      "documentation": "Documentación",
+      "support": "Soporte"
+    },
+    "newProject": {
+      "title": "Nuevo manuscrito",
+      "description": "Comienza un nuevo proyecto. Puedes agregar detalles y subir tu manuscrito a continuación.",
+      "labelTitle": "Título",
+      "placeholderTitle": "Ingresa el título de tu manuscrito",
+      "labelGenre": "Género",
+      "placeholderGenre": "Selecciona un género",
+      "create": "Crear proyecto",
+      "creating": "Creando...",
+      "errorTitleRequired": "El título es obligatorio.",
+      "errorNotLoggedIn": "Debes iniciar sesión para crear un proyecto.",
+      "errorGeneric": "Algo salió mal. Por favor intenta de nuevo."
+    },
+    "projectCard": {
+      "wordCount": "{count} / {target} palabras"
+    },
+    "status": {
+      "draft": "Borrador",
+      "review": "Revisión",
+      "formatting": "Formateando",
+      "publishing": "Publicando",
+      "live": "Publicado",
+      "archived": "Archivado"
+    },
+    "kanban": {
+      "draft": "Borrador",
+      "formatting": "Formateando",
+      "publishing": "Publicando",
+      "live": "Publicado",
+      "noProjects": "Sin proyectos"
+    },
+    "logout": {
+      "logOut": "Cerrar sesión",
+      "signingOut": "Cerrando sesión…",
+      "failed": "No se pudo cerrar la sesión. Inténtalo de nuevo."
+    },
+    "deleteAccount": {
+      "trigger": "Eliminar cuenta",
+      "dialogTitle": "¿Eliminar tu cuenta?",
+      "dialogDescription": "Esto elimina de forma permanente tu perfil, proyectos, manuscritos, exportaciones, regalías y conversaciones con el asistente. No se puede deshacer.",
+      "confirmLabel": "Escribe",
+      "confirm": "Eliminar cuenta",
+      "deleting": "Eliminando…",
+      "errorConfirmPhrase": "Escribe \"{phrase}\" para confirmar.",
+      "errorGeneric": "Error al eliminar la cuenta"
+    }
+  },
+  "editor": {
+    "noManuscript": {
+      "heading": "Aún no hay manuscrito",
+      "body": "Sube un archivo .docx o .txt para comenzar, o abre un editor en blanco y empieza a escribir {projectTitle}.",
+      "uploadButton": "Subir manuscrito",
+      "creatingButton": "Creando...",
+      "startWritingButton": "Empezar a escribir"
+    },
+    "topBar": {
+      "tab": {
+        "edit": "Editar",
+        "editorial": "Editorial",
+        "preview": "Vista previa",
+        "royalties": "Regalías"
+      },
+      "previewButton": "Vista previa"
+    },
+    "chapterNav": {
+      "chaptersOf": "Capítulos de",
+      "noChapters": "No se encontraron capítulos",
+      "addChapter": "Agregar capítulo"
+    },
+    "chapterItem": {
+      "reorderAriaLabel": "Reordenar capítulo",
+      "reorderTitle": "Arrastrar para reordenar",
+      "inconsistencyAriaLabel": "Problema de continuidad detectado",
+      "actionsAriaLabel": "Acciones del capítulo",
+      "rename": "Renombrar",
+      "splitAtCursor": "Dividir en el cursor",
+      "mergeWithNext": "Fusionar con el siguiente",
+      "deleteChapter": "Eliminar capítulo"
+    },
+    "distractionFree": {
+      "exitButton": "Salir",
+      "exitTitle": "Salir del modo sin distracciones (Esc)"
+    },
+    "toolbar": {
+      "bold": "Negrita",
+      "italic": "Cursiva",
+      "underline": "Subrayado",
+      "strikethrough": "Tachado",
+      "inlineCode": "Código en línea",
+      "heading1": "Encabezado 1 (Capítulo)",
+      "heading2": "Encabezado 2",
+      "heading3": "Encabezado 3",
+      "bulletList": "Lista con viñetas",
+      "numberedList": "Lista numerada",
+      "blockquote": "Cita en bloque",
+      "sceneBreak": "Separador de escena",
+      "undo": "Deshacer",
+      "redo": "Rehacer",
+      "link": "Enlace",
+      "findReplace": "Buscar y reemplazar",
+      "writingStats": "Estadísticas de escritura",
+      "distractionFree": "Sin distracciones",
+      "fullBook": "Libro completo",
+      "chapters": "Capítulos",
+      "statusSaved": "Guardado",
+      "statusSaving": "Guardando…",
+      "statusUnsaved": "Cambios sin guardar",
+      "statusError": "Error al guardar",
+      "savedAgo": "Guardado hace {ago}",
+      "lastSavedTitle": "Último guardado {time}",
+      "wordCount": "{count} palabras"
+    },
+    "findReplace": {
+      "ariaLabel": "Buscar y reemplazar",
+      "findPlaceholder": "Buscar",
+      "replacePlaceholder": "Reemplazar con",
+      "matchCaseTitle": "Distinguir mayúsculas",
+      "prevTitle": "Anterior (Shift+Enter)",
+      "nextTitle": "Siguiente (Enter)",
+      "closeTitle": "Cerrar (Esc)",
+      "replaceButton": "Reemplazar",
+      "replaceAllButton": "Todos",
+      "searchScope": "Buscando en todo el manuscrito."
+    },
+    "linkPopover": {
+      "ariaLabel": "Insertar enlace",
+      "applyButton": "Aplicar",
+      "clearButton": "Borrar",
+      "closeTitle": "Cerrar"
+    },
+    "viewer": {
+      "emptyState": "Aún no hay contenido en el manuscrito. Sube o pega tu texto para comenzar."
+    },
+    "writingStats": {
+      "today": "Hoy",
+      "sessionWords": "{count} en esta sesión",
+      "words": "Palabras",
+      "characters": "Caracteres",
+      "readingTime": "Tiempo de lectura",
+      "readingMinutes": "~{count} min",
+      "dailyGoal": "Meta diaria"
+    },
+    "manuscriptEditor": {
+      "deleteDialogTitle": "¿Eliminar este capítulo?",
+      "deleteDialogDescription": "\"{title}\" y su contenido serán eliminados del manuscrito. Esta acción no se puede deshacer.",
+      "deleteDialogConfirm": "Eliminar",
+      "splitCursorHint": "Coloca el cursor donde quieres que comience el nuevo capítulo."
+    },
+    "tiptap": {
+      "placeholder": "Empieza a escribir tu historia..."
+    }
+  },
+  "upload": {
+    "manuscriptLabel": "Archivo del manuscrito",
+    "manuscriptDropPrompt": "Suelta tu manuscrito aquí, o haz clic para explorar",
+    "manuscriptHint": ".docx o .txt · hasta {max}",
+    "coverLabel": "Imagen de portada",
+    "coverOptional": "(opcional)",
+    "coverDropPrompt": "Suelta la imagen de portada aquí",
+    "coverReplace": "Reemplazar portada",
+    "coverHint": ".jpg, .png o .webp · hasta {max}",
+    "coverAlt": "Portada de {projectTitle}",
+    "submitButton": "Subir y procesar manuscrito",
+    "submitProcessing": "Procesando...",
+    "submitRedirecting": "Redirigiendo al editor...",
+    "step": {
+      "uploadingManuscript": "Subiendo manuscrito...",
+      "parsing": "Analizando manuscrito...",
+      "uploadingCover": "Subiendo imagen de portada...",
+      "done": "¡Carga completa!",
+      "error": "Error en la carga"
+    },
+    "error": {
+      "unsupportedManuscriptType": "Tipo de archivo no compatible: .{ext}. Por favor sube un archivo .docx o .txt.",
+      "manuscriptTooLarge": "Archivo demasiado grande ({size}). El tamaño máximo es {max}.",
+      "unsupportedCoverType": "Tipo de imagen no compatible: .{ext}. Por favor sube un archivo .jpg, .png o .webp.",
+      "coverTooLarge": "Imagen demasiado grande ({size}). El tamaño máximo es {max}.",
+      "uploadFailed": "Error en la carga: {detail}",
+      "coverUploadFailed": "Error al subir la portada: {detail}",
+      "unexpected": "Ocurrió un error inesperado"
+    }
+  },
+  "pages": {
+    "library": {
+      "heading": "Biblioteca",
+      "description": "Tus manuscritos, plantillas y recursos",
+      "emptyHeading": "Tu biblioteca está siendo preparada",
+      "emptyBody": "Los manuscritos subidos, las plantillas guardadas y los materiales de referencia aparecerán aquí."
+    },
+    "profile": {
+      "heading": "Perfil",
+      "description": "Los detalles de tu cuenta",
+      "labelDisplayName": "Nombre para mostrar",
+      "labelEmail": "Correo electrónico",
+      "labelMemberSince": "Miembro desde",
+      "signOutHint": "Cerrar sesión te regresará a la pantalla de inicio de sesión.",
+      "dangerZoneHeading": "Zona de peligro",
+      "dangerZoneDescription": "Elimina permanentemente tu cuenta y todos los datos asociados."
+    },
+    "settings": {
+      "heading": "Ajustes",
+      "description": "Administra tu cuenta y preferencias",
+      "linkProfileLabel": "Perfil",
+      "linkProfileDescription": "Ver los detalles de tu cuenta y cerrar sesión",
+      "linkAiLabel": "IA",
+      "linkAiDescription": "Agrega tu propia clave de API y elige qué modelo impulsa al asistente"
+    },
+    "reports": {
+      "heading": "Informes",
+      "description": "Analítica e información sobre tus manuscritos",
+      "emptyHeading": "Los informes están en camino",
+      "emptyBody": "Las analíticas de ventas, tendencias de lectores e información de rendimiento estarán disponibles aquí."
+    },
+    "royalties": {
+      "heading": "Regalías",
+      "description": "Sube reportes de ventas y rastrea tus ganancias en todas las tiendas"
+    },
+    "projectEditorial": {
+      "backToEditor": "Volver al editor",
+      "heading": "Informe editorial"
+    },
+    "projectUpload": {
+      "heading": "Subir manuscrito",
+      "description": "Sube tu manuscrito e imagen de portada para <strong>{title}</strong>"
+    },
+    "projectRoyalties": {
+      "heading": "Regalías",
+      "description": "Ingresos y unidades vendidas de {title}"
+    },
+    "settingsAi": {
+      "heading": "Ajustes de IA",
+      "description": "Elige qué modelo impulsa al asistente y las herramientas editoriales, y agrega la clave de API con la que funcionan.",
+      "back": "Volver a ajustes",
+      "providerLabel": "Proveedor",
+      "providerNone": "Sin IA",
+      "providerHelp": "Elige con quién tienes cuenta. Si lo dejas en «Sin IA», las funciones de IA se desactivan; todo lo demás sigue funcionando.",
+      "providerAnthropic": "Anthropic (Claude)",
+      "providerOpenai": "OpenAI",
+      "providerGoogle": "Google (Gemini)",
+      "keyLabel": "Clave de API",
+      "keyPlaceholder": "Pega tu clave",
+      "keySet": "Clave configurada",
+      "keyReplace": "Reemplazar clave",
+      "keyCancel": "Cancelar",
+      "keyClear": "Quitar clave",
+      "keyHelp": "Tu clave se cifra antes de guardarse y nunca se devuelve al navegador. Tu proveedor te cobra directamente.",
+      "chatModelLabel": "Modelo de chat",
+      "utilityModelLabel": "Modelo auxiliar",
+      "modelPlaceholder": "proveedor:id-del-modelo",
+      "modelHelp": "Opcional. Déjalo vacío para usar el modelo predeterminado de tu proveedor. El modelo auxiliar se encarga de tareas pequeñas, como nombrar conversaciones.",
+      "autonomyLabel": "Autonomía del asistente",
+      "autonomyOff": "Desactivada",
+      "autonomyLite": "Ligera: solo responder preguntas",
+      "autonomyEditorial": "Editorial: leer capítulos y el Códice",
+      "autonomyCollaborator": "Colaborador: acceso completo a herramientas",
+      "save": "Guardar",
+      "saving": "Guardando…",
+      "saved": "Ajustes guardados",
+      "test": "Probar conexión",
+      "testing": "Probando…",
+      "testOk": "Conectado a {model}",
+      "testFailed": "No se pudo conectar: {message}",
+      "noSecret": "Esta instalación aún no puede guardar claves de API. Configura AI_KEY_ENCRYPTION_SECRET y reinicia.",
+      "saveFailed": "No se pudieron guardar los ajustes"
+    }
+  },
+  "royalties": {
+    "dashboard": {
+      "statTotalRevenue": "Ingresos totales",
+      "statUnitsSold": "Unidades vendidas",
+      "statActiveRetailers": "Tiendas activas",
+      "statTopTerritory": "Territorio principal",
+      "importSalesReport": "Importar reporte de ventas",
+      "labelRetailer": "Tienda",
+      "placeholderRetailer": "Seleccionar tienda",
+      "labelProject": "Proyecto",
+      "placeholderProject": "Seleccionar proyecto",
+      "dropZonePrompt": "Arrastra y suelta un archivo CSV, o haz clic para explorar",
+      "dropZoneFormats": "Compatible con formatos de KDP, Apple Books, Kobo y StreetLib",
+      "btnParsePreview": "Analizar y previsualizar",
+      "btnImport": "Importar",
+      "previewCount": "Vista previa ({count} registros)",
+      "colRetailer": "Tienda",
+      "colTerritory": "Territorio",
+      "colUnits": "Unidades",
+      "colRevenue": "Ingresos",
+      "colUsd": "USD",
+      "colPeriod": "Período",
+      "chartRevenueByRetailer": "Ingresos por tienda",
+      "chartRevenueByTerritory": "Ingresos por territorio",
+      "noTerritoryData": "Aún no hay datos de territorio",
+      "chartUnitsSoldOverTime": "Unidades vendidas a lo largo del tiempo",
+      "tooltipRevenue": "Ingresos",
+      "tooltipUnitsSold": "Unidades vendidas"
+    },
+    "retailerMix": {
+      "title": "Mezcla de tiendas",
+      "tooltipRevenue": "Ingresos"
+    },
+    "revenueChart": {
+      "title": "Rendimiento de ingresos",
+      "tooltipRevenue": "Ingresos"
+    },
+    "revenueHero": {
+      "totalRevenue": "Ingresos totales",
+      "thisMonth": "Este mes",
+      "unitsSold": "Unidades vendidas"
+    }
+  },
+  "assistant": {
+    "brandName": "Asistente",
+    "rail": {
+      "assistant": "Asistente"
+    },
+    "panel": {
+      "newConversation": "Nueva conversación",
+      "conversations": "Conversaciones",
+      "untitled": "Conversación sin título",
+      "greetingTitle": "Pregunta sobre tu libro",
+      "greetingBody": "He leído tu manuscrito. Pregúntame sobre personajes, continuidad o dónde dejaste un hilo — reviso las páginas antes de responder.",
+      "placeholder": "Pregunta sobre tu libro…",
+      "send": "Enviar",
+      "thinking": "Pensando…",
+      "dismissError": "Descartar"
+    },
+    "tools": {
+      "read_chapter": "Leyó el capítulo {index}",
+      "query_codex": "Consultó el Códice"
+    },
+    "errors": {
+      "generic": "Algo salió mal. Intenta de nuevo.",
+      "rate_limited": "Una pausa breve — estás enviando mensajes más rápido de lo que puedo leerlos. Intenta de nuevo en un momento.",
+      "no_manuscript": "Sube un manuscrito para empezar a conversar sobre él.",
+      "no_ai_key": "Todavía no hay una clave de API configurada. Agrega una en Ajustes → IA para activar al asistente."
+    },
+    "noKey": {
+      "title": "Agrega una clave de API para activar al asistente",
+      "body": "El asistente lee tus capítulos antes de responder, con un modelo para el que tú pones la clave. Tu proveedor te cobra directamente: nada pasa por esta aplicación.",
+      "cta": "Abrir ajustes de IA"
+    },
+    "codex": {
+      "tabChat": "Chat",
+      "tabCodex": "Códice",
+      "generate": "Crear Códice",
+      "refresh": "Actualizar",
+      "analyzing": "Analizando…",
+      "intro": "Revisa tu manuscrito para registrar cada personaje, lugar y momento de la cronología, y señala errores de continuidad.",
+      "inconsistencies": "Inconsistencias ({count})",
+      "noInconsistencies": "No se detectaron inconsistencias.",
+      "characters": "Personajes ({count})",
+      "locations": "Lugares ({count})",
+      "timeline": "Cronología ({count})",
+      "none": "No se encontró ninguno.",
+      "chapter": "Cap. {n}",
+      "aliases": "También conocido como {list}",
+      "firstMention": "(cap. {n})",
+      "failed": "No se pudo crear el Códice. Inténtalo de nuevo."
+    }
+  },
+  "email": {
+    "magicLink": {
+      "subject": "Tu enlace para iniciar sesión en ManuHaven",
+      "body": "Usa este enlace para iniciar sesión en ManuHaven:\n\n{url}\n\nEl enlace expira en 5 minutos y solo funciona una vez. Si no lo pediste, puedes ignorar este correo."
+    },
+    "resetPassword": {
+      "subject": "Restablece tu contraseña de ManuHaven",
+      "body": "Usa este enlace para elegir una contraseña nueva de ManuHaven:\n\n{url}\n\nEl enlace expira en 1 hora. Si no lo pediste, puedes ignorar este correo y tu contraseña no cambiará."
+    },
+    "verifyEmail": {
+      "subject": "Verifica tu correo de ManuHaven",
+      "body": "Usa este enlace para verificar tu correo y terminar de crear tu cuenta de ManuHaven:\n\n{url}\n\nSi no creaste una cuenta, puedes ignorar este correo."
+    }
+  }
+}

@@ -1,0 +1,159 @@
+/* scifi.css — Clean, futuristic template for science fiction novels */
+/* No @import: conversion runs offline in a container, so a remote
+   font request is silently dropped. The stacks below fall back to
+   fonts shipped in the image (see the Dockerfile's fonts-* packages). */
+
+body {
+  font-family: 'IBM Plex Serif', 'Georgia', serif;
+  font-size: 11pt;
+  line-height: 1.7;
+  color: #1e293b;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Chapter Structure --- */
+
+section.chapter {
+  page-break-before: always;
+}
+
+.chapter-title {
+  font-family: 'IBM Plex Sans', 'Helvetica', sans-serif;
+  font-size: 1.8em;
+  font-weight: 600;
+  text-align: left;
+  margin-top: 3em;
+  margin-bottom: 1.2em;
+  color: #0f172a;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* --- Drop Cap --- */
+
+.chapter-opening {
+  text-indent: 0;
+}
+
+.chapter-opening::first-letter {
+  font-family: 'IBM Plex Sans', 'Helvetica', sans-serif;
+  font-size: 3.2em;
+  float: left;
+  line-height: 1;
+  margin-right: 0.1em;
+  margin-top: 0.05em;
+  color: #334155;
+  font-weight: 600;
+}
+
+/* --- Paragraphs --- */
+
+p {
+  margin: 0;
+  text-indent: 1.25em;
+  text-align: justify;
+  orphans: 2;
+  widows: 2;
+}
+
+p + p {
+  margin-top: 0;
+}
+
+/* --- Scene Breaks --- */
+
+hr.scene-break {
+  border: none;
+  text-align: center;
+  margin: 1.5em 0;
+  height: auto;
+}
+
+hr.scene-break::after {
+  content: "\2014  \25C6  \2014";
+  display: block;
+  font-size: 0.9em;
+  color: #64748b;
+  letter-spacing: 0.3em;
+}
+
+/* --- Blockquotes --- */
+
+blockquote {
+  font-style: italic;
+  margin: 1em 1.5em;
+  padding-left: 0.8em;
+  border-left: 3px solid #94a3b8;
+  color: #334155;
+}
+
+blockquote p {
+  text-indent: 0;
+}
+
+/* --- Headings --- */
+
+h2 {
+  font-family: 'IBM Plex Sans', 'Helvetica', sans-serif;
+  font-size: 1.3em;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+  color: #0f172a;
+}
+
+h3 {
+  font-family: 'IBM Plex Sans', 'Helvetica', sans-serif;
+  font-size: 1.1em;
+  font-weight: 400;
+  margin-top: 1.2em;
+  margin-bottom: 0.6em;
+  color: #334155;
+}
+
+/* --- Lists --- */
+
+ul, ol {
+  margin: 0.8em 0;
+  padding-left: 2em;
+}
+
+li {
+  margin-bottom: 0.2em;
+}
+
+/* --- Inline Styles --- */
+
+a {
+  color: #1e40af;
+  text-decoration: underline;
+}
+
+code {
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: 0.9em;
+  background-color: #e2e8f0;
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  color: #0f172a;
+}
+
+pre {
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: 0.85em;
+  background-color: #e2e8f0;
+  padding: 1em;
+  border-radius: 4px;
+  /* `overflow`, not `overflow-x`: WeasyPrint does not know the axis-specific
+     property and warns on every PDF export. */
+  overflow: auto;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
