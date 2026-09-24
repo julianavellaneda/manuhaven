@@ -26,7 +26,7 @@ RUN bun build scripts/migrate.ts --target=node --format=esm \
       --external pg-native --outfile=dist/migrate.mjs
 
 # ---- runtime ----------------------------------------------------------------
-FROM node:24-slim AS runner
+FROM node:25-slim AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production \
