@@ -15,8 +15,13 @@ updates:
         patterns: ["ai", "@ai-sdk/*"]
       tiptap:
         patterns: ["@tiptap/*"]
+      # react and react-dom must move together or tests fail on a version mismatch.
+      react:
+        patterns: ["react", "react-dom", "@types/react", "@types/react-dom"]
+      # Majors (TypeScript, ESLint, Vitest…) arrive as individual PRs instead.
       dev-dependencies:
         dependency-type: development
+        update-types: ["minor", "patch"]
     ignore:
       # AI SDK 6 -> 7 is a planned migration (ROADMAP.md v0.4), not a bump.
       - dependency-name: "ai"
@@ -47,3 +52,7 @@ updates:
       interval: weekly
     commit-message:
       prefix: "build(deps)"
+    ignore:
+      # Stay on Node LTS; odd majors are never LTS. Move to 26 by hand once it is.
+      - dependency-name: "node"
+        update-types: ["version-update:semver-major"]
