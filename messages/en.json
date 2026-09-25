@@ -385,7 +385,12 @@
     },
     "projectEditorial": {
       "backToEditor": "Back to editor",
-      "heading": "Editorial Report"
+      "heading": "Editorial Report",
+      "noKey": {
+        "title": "Add an API key to generate this report",
+        "body": "Editorial reports run on a model you supply the key for. You are billed by your provider directly — nothing runs through this app.",
+        "cta": "Open AI settings"
+      }
     },
     "projectUpload": {
       "heading": "Upload Manuscript",

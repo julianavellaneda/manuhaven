@@ -132,6 +132,28 @@ tests/integration/convert.sh   # DOCX -> EPUB -> epubcheck (needs Docker + a JRE
 | Export | Pandoc + WeasyPrint in a container (`services/converter`) |
 | i18n | next-intl, `en` and `es-MX` at exact key parity |
 
+```mermaid
+flowchart LR
+  browser["Browser<br/>(editor, dashboard)"]
+  subgraph app["Next.js app"]
+    routes["Pages, API routes,<br/>server actions"]
+    queries["lib/db/queries<br/>(every call takes userId)"]
+    storage["lib/storage<br/>(fs or S3)"]
+    ai["lib/ai<br/>(one provider layer)"]
+  end
+  pg[("Postgres 18")]
+  files[("Volume or<br/>S3 bucket")]
+  conv["Converter<br/>Pandoc + WeasyPrint<br/>(no credentials, no port)"]
+  llm["Anthropic / OpenAI / Google<br/>(user's own key)"]
+
+  browser -- "session cookie" --> routes
+  routes --> queries --> pg
+  routes --> storage --> files
+  routes -- "HTML + cover bytes" --> conv
+  conv -- "EPUB / PDF bytes" --> routes
+  routes --> ai --> llm
+```
+
 | Doc | |
 |---|---|
 | [`docs/self-hosting.md`](docs/self-hosting.md) | Running your own instance |
@@ -142,6 +164,30 @@ tests/integration/convert.sh   # DOCX -> EPUB -> epubcheck (needs Docker + a JRE
 
 `docs/platform/` holds the deeper reference material — schema, design system,
 EPUB specification.
+
+## Engineering highlights
+
+- **One command, no cloud.** `docker compose up` runs Postgres, the app and the
+  converter. Only the app publishes a port.
+- **A typed data layer with an authz test matrix.** Pages and routes never touch
+  the database directly. Every function in `lib/db/queries/` takes a `userId`,
+  and `tests/integration/db/authz.test.ts` runs each one against real Postgres
+  as a second user to prove it can't read or change the first user's rows.
+- **Files are never public.** The database stores storage keys, not URLs, and
+  every download goes through `/api/files/[...key]`, which checks ownership.
+  Uploads are checked by magic bytes and size on the server.
+- **Bring-your-own-key AI through one layer.** Model and key resolution live in
+  one module. User keys are encrypted at rest with AES-256-GCM and never sent
+  back to the browser. AI routes share a per-user throttle and atomic cooldowns,
+  and manuscript text is never logged.
+- **A converter with no credentials.** It gets HTML and cover bytes and returns
+  a file. It has no database or storage access and no published port. CI
+  validates its EPUB output with epubcheck.
+- **One image for any deployment.** Public config is read at runtime and
+  injected into the page, so nothing deployment-specific is baked in at build
+  time. Pages ship a per-request nonce-based Content-Security-Policy.
+- **Bilingual by test.** A unit test fails the build if `en` and `es-MX` drift
+  out of key parity.
 
 ## How it compares
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { Printer, Sparkles } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -9,6 +10,7 @@ import type {
   StyleAnalysis,
 } from "@/lib/ai/editorial";
 import { progressLabel, progressPercent } from "@/lib/ai/editorial-stream";
+import { NoAiKeyNotice } from "./NoAiKeyNotice";
 import { ReportTabs } from "./editorial/ReportTabs";
 import { useEditorialReport } from "./use-editorial-report";
 
@@ -23,8 +25,9 @@ export function EditorialReport({
   savedReport,
   savedStyle,
 }: Props) {
-  const { report, style, progress, error, isRunning, generate } =
+  const { report, style, progress, error, errorCode, isRunning, generate } =
     useEditorialReport(projectId, savedReport, savedStyle);
+  const t = useTranslations("pages.projectEditorial.noKey");
 
   return (
     <div className="space-y-6 print:space-y-3">
@@ -70,10 +73,20 @@ export function EditorialReport({
           </div>
         )}
 
-        {error && (
-          <p className="mt-4 rounded border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">
-            {error}
-          </p>
+        {errorCode === "no_ai_key" ? (
+          <div className="mt-4">
+            <NoAiKeyNotice
+              title={t("title")}
+              body={t("body")}
+              cta={t("cta")}
+            />
+          </div>
+        ) : (
+          error && (
+            <p className="mt-4 rounded border border-destructive/40 bg-destructive/10 p-3 text-sm text-destructive">
+              {error}
+            </p>
+          )
         )}
       </Card>
 

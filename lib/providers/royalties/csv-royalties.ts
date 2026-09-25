@@ -41,17 +41,44 @@ function parseCSV(text: string): string[][] {
   return rows;
 }
 
-function csvToObjects(text: string): Record<string, string>[] {
+interface ParsedCSV {
+  headers: string[];
+  rows: Record<string, string>[];
+}
+
+function csvToObjects(text: string): ParsedCSV {
   const rows = parseCSV(text);
-  if (rows.length < 2) return [];
+  if (rows.length < 2) return { headers: rows[0] ?? [], rows: [] };
   const headers = rows[0];
-  return rows.slice(1).map((row) => {
-    const obj: Record<string, string> = {};
-    headers.forEach((h, i) => {
-      obj[h] = row[i] ?? "";
-    });
-    return obj;
-  });
+  return {
+    headers,
+    rows: rows.slice(1).map((row) => {
+      const obj: Record<string, string> = {};
+      headers.forEach((h, i) => {
+        obj[h] = row[i] ?? "";
+      });
+      return obj;
+    }),
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Retailer-distinctive header columns
+// ---------------------------------------------------------------------------
+// Every field a parser reads is looked up by key and defaults to "0"/""
+// when missing, so a file from the wrong retailer would otherwise "parse"
+// into a handful of blank/zeroed records instead of failing. Requiring each
+// retailer's distinctive columns up front makes a mismatched file (e.g. a
+// Kobo export uploaded as a KDP report) fall through to the existing
+// "No valid records" error instead.
+
+const KDP_REQUIRED_COLUMNS = ["Marketplace", "Units Sold"];
+const APPLE_REQUIRED_COLUMNS = ["Begin Date", "End Date", "Developer Proceeds"];
+const KOBO_REQUIRED_COLUMNS = ["Net Sold", "Total Earnings"];
+const STREETLIB_REQUIRED_COLUMNS = ["Period", "Store", "Net Revenue"];
+
+function hasRequiredColumns(headers: string[], required: string[]): boolean {
+  return required.every((col) => headers.includes(col));
 }
 
 // ---------------------------------------------------------------------------
@@ -138,7 +165,8 @@ function parseKDPReport(
   projectId: string
 ): RoyaltyRecord[] {
   const text = file.toString("utf-8");
-  const rows = csvToObjects(text);
+  const { headers, rows } = csvToObjects(text);
+  if (!hasRequiredColumns(headers, KDP_REQUIRED_COLUMNS)) return [];
   const records: RoyaltyRecord[] = [];
 
   for (const row of rows) {
@@ -176,7 +204,8 @@ function parseAppleReport(
   projectId: string
 ): RoyaltyRecord[] {
   const text = file.toString("utf-8");
-  const rows = csvToObjects(text);
+  const { headers, rows } = csvToObjects(text);
+  if (!hasRequiredColumns(headers, APPLE_REQUIRED_COLUMNS)) return [];
   const records: RoyaltyRecord[] = [];
 
   for (const row of rows) {
@@ -214,7 +243,8 @@ function parseKoboReport(
   projectId: string
 ): RoyaltyRecord[] {
   const text = file.toString("utf-8");
-  const rows = csvToObjects(text);
+  const { headers, rows } = csvToObjects(text);
+  if (!hasRequiredColumns(headers, KOBO_REQUIRED_COLUMNS)) return [];
   const records: RoyaltyRecord[] = [];
 
   for (const row of rows) {
@@ -251,7 +281,8 @@ function parseStreetLibReport(
   projectId: string
 ): RoyaltyRecord[] {
   const text = file.toString("utf-8");
-  const rows = csvToObjects(text);
+  const { headers, rows } = csvToObjects(text);
+  if (!hasRequiredColumns(headers, STREETLIB_REQUIRED_COLUMNS)) return [];
   const records: RoyaltyRecord[] = [];
 
   // StreetLib Store → retailer mapping

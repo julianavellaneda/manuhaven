@@ -1,7 +1,9 @@
 import { getSessionCookie } from "better-auth/cookies";
 import createMiddleware from "next-intl/middleware";
-import { NextResponse, type NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { routing } from "./i18n/routing";
+import { serverPublicEnv } from "./lib/public-env";
+import { buildCsp, createNonce } from "./lib/security/csp";
 
 const handleI18nRouting = createMiddleware(routing);
 
@@ -24,10 +26,31 @@ function resolveLocale(pathname: string): {
   return { locale: routing.defaultLocale, pathWithoutLocale: pathname };
 }
 
-export function proxy(request: NextRequest) {
-  // Step 1: locale routing first. This may redirect (normalize/strip a prefix)
-  // or rewrite internally.
+function contentSecurityPolicy(nonce: string): string {
+  const { posthogKey, posthogHost } = serverPublicEnv();
+  return buildCsp({
+    nonce,
+    isDev: process.env.NODE_ENV === "development",
+    analyticsHost: posthogKey ? posthogHost : "",
+  });
+}
+
+export function proxy(incoming: NextRequest) {
+  // Step 0: a fresh CSP nonce. Next.js reads it from the *request* header while
+  // rendering and stamps it on its scripts, and our own inline script reads
+  // `x-nonce`; the browser enforces the response header. next-intl forwards
+  // the request headers it is given.
+  const nonce = createNonce();
+  const csp = contentSecurityPolicy(nonce);
+  const requestHeaders = new Headers(incoming.headers);
+  requestHeaders.set("x-nonce", nonce);
+  requestHeaders.set("Content-Security-Policy", csp);
+  const request = new NextRequest(incoming, { headers: requestHeaders });
+
+  // Step 1: locale routing. This may redirect (normalize/strip a prefix) or
+  // rewrite internally.
   const response = handleI18nRouting(request);
+  response.headers.set("Content-Security-Policy", csp);
 
   const { pathname } = request.nextUrl;
   const { locale, pathWithoutLocale } = resolveLocale(pathname);

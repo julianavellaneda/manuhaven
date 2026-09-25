@@ -5,8 +5,6 @@ import { useTranslations } from "next-intl";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
-import Underline from "@tiptap/extension-underline";
-import Link from "@tiptap/extension-link";
 import { SearchAndReplace } from "@/lib/editor/extensions/search-and-replace";
 import {
   ManuHavenShortcuts,
@@ -34,14 +32,15 @@ export function TiptapEditor({
   const t = useTranslations("editor.tiptap");
   const extensions = useMemo(
     () => [
+      // StarterKit v3 bundles Link and Underline; adding them again registers
+      // each extension twice.
       StarterKit.configure({
         heading: { levels: [1, 2, 3] },
-      }),
-      Underline,
-      Link.configure({
-        openOnClick: false,
-        autolink: true,
-        HTMLAttributes: { rel: "noopener noreferrer", target: "_blank" },
+        link: {
+          openOnClick: false,
+          autolink: true,
+          HTMLAttributes: { rel: "noopener noreferrer", target: "_blank" },
+        },
       }),
       SearchAndReplace,
       ManuHavenShortcuts.configure(shortcuts ?? {}),

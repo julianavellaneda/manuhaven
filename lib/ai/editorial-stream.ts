@@ -84,7 +84,11 @@ interface SSECallbacks {
     report: EditorialReport;
     style: StyleAnalysis;
   }) => void;
-  onError: (message: string) => void;
+  /**
+   * `code` mirrors the route's `code` field, e.g. `"no_ai_key"` — the UI
+   * uses it to show the Settings → AI link instead of `message`.
+   */
+  onError: (message: string, code?: string) => void;
 }
 
 export async function readEditorialSSE(
@@ -97,11 +101,14 @@ export async function readEditorialSSE(
     } else if (event === "done") {
       cb.onDone(data as Parameters<SSECallbacks["onDone"]>[0]);
     } else if (event === "error") {
-      const msg =
-        data && typeof data === "object" && "error" in data
-          ? String((data as { error: unknown }).error)
-          : "Unknown error";
-      cb.onError(msg);
+      const d = data && typeof data === "object" ? (data as Record<string, unknown>) : null;
+      const msg = d && "error" in d ? String(d.error) : "Unknown error";
+      const code = d && typeof d.code === "string" ? d.code : undefined;
+      if (code !== undefined) {
+        cb.onError(msg, code);
+      } else {
+        cb.onError(msg);
+      }
     }
   });
 }

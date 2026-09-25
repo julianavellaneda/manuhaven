@@ -346,6 +346,10 @@ export function ManuscriptUpload({
           <div className="flex gap-4">
             {coverPreview && (
               <div className="relative shrink-0">
+                {/* Not next/image: the preview is a blob: URL or an
+                    authz-checked /api/files URL, neither of which the
+                    server-side optimizer can fetch. */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={coverPreview}
                   alt={t("coverAlt", { projectTitle })}

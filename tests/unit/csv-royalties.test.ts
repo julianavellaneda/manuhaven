@@ -50,6 +50,35 @@ describe("CSVRoyaltySource", () => {
   });
 });
 
+describe("Cross-retailer header validation", () => {
+  const FIXTURE_BY_RETAILER: Record<
+    (typeof SUPPORTED_CSV_RETAILERS)[number],
+    string
+  > = {
+    amazon: "kdp-report.csv",
+    apple: "apple-report.csv",
+    kobo: "kobo-report.csv",
+    streetlib: "streetlib-report.csv",
+  };
+
+  it("still parses its own retailer's fixture", async () => {
+    for (const retailer of SUPPORTED_CSV_RETAILERS) {
+      const records = await parse(retailer, fixture(FIXTURE_BY_RETAILER[retailer]));
+      expect(records.length).toBeGreaterThan(0);
+    }
+  });
+
+  it("rejects every other retailer's fixture instead of parsing zeroed records", async () => {
+    for (const retailer of SUPPORTED_CSV_RETAILERS) {
+      for (const other of SUPPORTED_CSV_RETAILERS) {
+        if (other === retailer) continue;
+        const records = await parse(retailer, fixture(FIXTURE_BY_RETAILER[other]));
+        expect(records).toEqual([]);
+      }
+    }
+  });
+});
+
 describe("KDP reports", () => {
   it("parses every row of the fixture", async () => {
     const records = await parse("amazon", fixture("kdp-report.csv"));

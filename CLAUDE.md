@@ -277,6 +277,7 @@ bun run converter:up # Dev converter on 127.0.0.1:3001
 - [ ] No user-uploaded content served without Content-Disposition headers
 - [ ] Rate limiting on conversion and AI endpoints
 - [ ] AI manuscript text never logged or persisted
+- [ ] Any inline `<script>` carries the CSP nonce (`x-nonce`, see `PublicEnvScript`); never loosen `script-src` in `lib/security/csp.ts`
 - [ ] User API keys encrypted at rest, never logged, never returned to the client
 
 ---

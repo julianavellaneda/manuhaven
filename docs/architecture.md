@@ -166,6 +166,7 @@ from them:
 │   ├── providers/royalties/      # CSV royalty sources
 │   ├── manuscript/               # chapter-ops.ts, chapter-utils.ts, html-to-tiptap.ts, txt-to-tiptap.ts
 │   ├── analytics/posthog.ts
+│   ├── security/csp.ts           # Per-request Content-Security-Policy
 │   ├── seo.ts                    # Also appOrigin(), the base URL auth uses
 │   ├── utils.ts
 │   ├── constants.ts
@@ -181,7 +182,7 @@ from them:
 │   └── platform/                 # Deeper reference: schema, design system, EPUB
 ├── docker-compose.yml            # app + db + converter
 ├── compose.dev.yml               # Postgres, Mailpit (+ converter) for `bun run dev`
-├── proxy.ts                      # Locale routing + session-cookie redirect
+├── proxy.ts                      # CSP nonce, locale routing, session-cookie redirect
 ├── CLAUDE.md                     # Coding rules for AI agents
 └── AGENTS.md                     # Pointer to CLAUDE.md
 ```
@@ -217,6 +218,7 @@ from them:
 | Session | `getSessionUser()` in routes and server actions, `requireUser()` in pages | `proxy.ts` only redirects on a missing cookie; the real check is in the handler |
 | Auth | `getAuth()` (`lib/auth/auth.ts`), mounted at `/api/auth/*` | A database hook creates the `profiles` row for every new user |
 | Storage | `getStorage()` (`lib/storage/`) | Keys start `{userId}/{projectId}/`; `fileUrl(key)` gives the `/api/files` link |
+| Page CSP | `buildCsp()` (`lib/security/csp.ts`), set per request by `proxy.ts` | Scripts run only with the request's nonce (`'strict-dynamic'`); `connect-src` is `'self'` plus the PostHog host when analytics is on. Every page renders per request, since the nonce exists only then. An inline `<script>` must read `x-nonce` from `headers()`, as `PublicEnvScript` does |
 
 The only unauthenticated routes are `/api/health` and `/api/auth/*`.
 

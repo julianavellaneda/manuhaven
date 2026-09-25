@@ -6,14 +6,13 @@ import {
   BookOpen,
   BookMarked,
   History,
-  KeyRound,
   Send,
   Sparkles,
   SquarePen,
   X,
 } from "lucide-react";
-import { Link } from "@/i18n/navigation";
 import { CodexTab } from "@/components/assistant/CodexTab";
+import { NoAiKeyNotice } from "@/components/ai/NoAiKeyNotice";
 import type { StoryBible } from "@/lib/ai/continuity";
 import { Button } from "@/components/ui/button";
 import {
@@ -194,7 +193,13 @@ export function AssistantPanel({
             </div>
           </ScrollArea>
 
-          {chat.errorCode === "no_ai_key" && <NoKeyState />}
+          {chat.errorCode === "no_ai_key" && (
+            <NoAiKeyNotice
+              title={t("noKey.title")}
+              body={t("noKey.body")}
+              cta={t("noKey.cta")}
+            />
+          )}
 
           {chat.errorCode && chat.errorCode !== "no_ai_key" && (
             <div className="mx-3 mb-2 flex items-start gap-2 rounded border border-destructive/40 bg-destructive/10 p-2 text-xs text-destructive">
@@ -303,23 +308,3 @@ function ToolChip({ chip }: { chip: AssistantToolChip }) {
   );
 }
 
-function NoKeyState() {
-  const t = useTranslations("assistant.noKey");
-  return (
-    <div className="mx-3 mb-2 rounded border bg-muted/40 p-3">
-      <p className="flex items-center gap-1.5 text-xs font-semibold">
-        <KeyRound className="size-3.5" />
-        {t("title")}
-      </p>
-      <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
-        {t("body")}
-      </p>
-      <Link
-        href="/dashboard/settings/ai"
-        className="mt-2 inline-block text-xs font-medium text-primary underline underline-offset-2"
-      >
-        {t("cta")}
-      </Link>
-    </div>
-  );
-}

@@ -91,4 +91,20 @@ describe("readEditorialSSE", () => {
     });
     expect(onError.mock.calls).toEqual([["boom"], ["Unknown error"]]);
   });
+
+  it("passes the error's code through, e.g. for a 409 no_ai_key", async () => {
+    const onProgress = vi.fn();
+    const onDone = vi.fn();
+    const onError = vi.fn();
+    await readEditorialSSE(
+      streamOf(
+        'event: error\ndata: {"error":"No API key configured for anthropic","code":"no_ai_key"}\n\n'
+      ),
+      { onProgress, onDone, onError }
+    );
+    expect(onError).toHaveBeenCalledWith(
+      "No API key configured for anthropic",
+      "no_ai_key"
+    );
+  });
 });

@@ -4,6 +4,7 @@ import { Toaster } from "sonner";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { connection } from "next/server";
 import { PosthogProvider } from "@/components/analytics/PosthogProvider";
 import { PublicEnvScript } from "@/components/config/PublicEnvScript";
 import { routing } from "@/i18n/routing";
@@ -56,7 +57,10 @@ export default async function LocaleLayout({ children, params }: Props) {
     notFound();
   }
 
-  // Enable static rendering for this locale.
+  // Every page renders per request: the CSP nonce from proxy.ts and the
+  // runtime config in PublicEnvScript both exist only at request time, so a
+  // prerendered page would ship with blocked scripts and build-time config.
+  await connection();
   setRequestLocale(locale);
 
   return (

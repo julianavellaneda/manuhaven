@@ -22,6 +22,9 @@ export function CoverImage({ src, alt, fallbackLetter }: CoverImageProps) {
   }
 
   return (
+    // Not next/image: its optimizer fetches the file server-side without the
+    // viewer's session cookie, and /api/files answers that with a 401.
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={src}
       alt={alt}

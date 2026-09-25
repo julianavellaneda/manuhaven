@@ -10,7 +10,9 @@ import {
 
 /**
  * Report/style state plus the streaming "generate" request. Any non-OK
- * response (including 409 `no_ai_key`) surfaces the route's `error` message.
+ * response surfaces the route's `error` message, except 409 `no_ai_key`,
+ * which is tracked separately in `errorCode` so the UI can show the
+ * Settings → AI link instead of the raw message.
  */
 export function useEditorialReport(
   projectId: string,
@@ -21,10 +23,21 @@ export function useEditorialReport(
   const [style, setStyle] = useState<StyleAnalysis | null>(savedStyle);
   const [progress, setProgress] = useState<ProgressState>({ phase: "idle" });
   const [error, setError] = useState<string | null>(null);
+  const [errorCode, setErrorCode] = useState<"no_ai_key" | null>(null);
   const isRunning = progress.phase !== "idle";
+
+  function fail(message: string, code?: string) {
+    if (code === "no_ai_key") {
+      setErrorCode("no_ai_key");
+    } else {
+      setError(message);
+    }
+    setProgress({ phase: "idle" });
+  }
 
   async function generate() {
     setError(null);
+    setErrorCode(null);
     setProgress({ phase: "starting" });
     try {
       const res = await fetch("/api/ai/editorial", {
@@ -34,6 +47,10 @@ export function useEditorialReport(
       });
       if (!res.ok || !res.body) {
         const body = await res.json().catch(() => null);
+        if (body?.code === "no_ai_key") {
+          fail(body.error, body.code);
+          return;
+        }
         throw new Error(body?.error ?? "Failed to start editorial report");
       }
       await readEditorialSSE(res.body, {
@@ -46,10 +63,7 @@ export function useEditorialReport(
           setStyle(s);
           setProgress({ phase: "idle" });
         },
-        onError: (msg) => {
-          setError(msg);
-          setProgress({ phase: "idle" });
-        },
+        onError: fail,
       });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unknown error");
@@ -57,5 +71,5 @@ export function useEditorialReport(
     }
   }
 
-  return { report, style, progress, error, isRunning, generate };
+  return { report, style, progress, error, errorCode, isRunning, generate };
 }

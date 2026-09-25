@@ -385,7 +385,12 @@
     },
     "projectEditorial": {
       "backToEditor": "Volver al editor",
-      "heading": "Informe editorial"
+      "heading": "Informe editorial",
+      "noKey": {
+        "title": "Agrega una clave de API para generar este informe",
+        "body": "Los informes editoriales funcionan con un modelo para el que tú pones la clave. Tu proveedor te cobra directamente: nada pasa por esta aplicación.",
+        "cta": "Abrir ajustes de IA"
+      }
     },
     "projectUpload": {
       "heading": "Subir manuscrito",
