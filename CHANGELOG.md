@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/julianavellaneda/manuhaven/compare/v0.1.0...v0.1.1) (2026-09-26)
+
+
+### Packaging
+
+* **release:** tag releases as vX.Y.Z so versioned images publish ([#25](https://github.com/julianavellaneda/manuhaven/issues/25)) ([d4b39fd](https://github.com/julianavellaneda/manuhaven/commit/d4b39fd5710a665ff0507cad45aed51cab1ebe8e))
+
 ## 0.1.0 (2026-09-25)
 
 
