@@ -74,6 +74,25 @@ export async function createProject(
 }
 
 /**
+ * Set the descriptive fields of a project. Returns false when the user does
+ * not own it.
+ */
+export async function updateProjectDetails(
+  userId: string,
+  projectId: string,
+  values: Partial<
+    Pick<Project, "subtitle" | "authorName" | "status" | "description" | "isbn">
+  >,
+): Promise<boolean> {
+  const rows = await getDb()
+    .update(projects)
+    .set(values)
+    .where(and(eq(projects.id, projectId), eq(projects.userId, userId)))
+    .returning({ id: projects.id });
+  return rows.length > 0;
+}
+
+/**
  * Store AI-generated metadata on the project and stamp the manuscript's
  * metadata cooldown, in one transaction so neither lands without the other.
  * Returns false when the user does not own the project.

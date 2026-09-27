@@ -24,6 +24,7 @@
     "converter:up": "docker compose -f compose.dev.yml --profile converter up -d --wait converter",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "bun scripts/migrate.ts",
+    "db:seed": "bun --preload ./scripts/server-only-stub.ts scripts/seed-demo.ts",
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
