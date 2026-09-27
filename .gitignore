@@ -52,3 +52,6 @@ next-env.d.ts
 
 # local file storage (STORAGE_DRIVER=fs default in dev)
 /.data/
+
+# playwright-cli session files (scripts/readme-screenshots.sh)
+.playwright-cli/

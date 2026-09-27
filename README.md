@@ -1,15 +1,38 @@
-# ManuHaven
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/images/logo-dark.svg">
+    <img src="docs/images/logo-light.svg" alt="ManuHaven" width="300">
+  </picture>
+</p>
 
-[![CI](https://github.com/julianavellaneda/manuhaven/actions/workflows/ci.yml/badge.svg)](https://github.com/julianavellaneda/manuhaven/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/github/v/release/julianavellaneda/manuhaven?include_prereleases&sort=semver)](https://github.com/julianavellaneda/manuhaven/releases)
-[![License: AGPL v3](https://img.shields.io/badge/license-AGPL--3.0-blue)](LICENSE)
+<h3 align="center">The open-source, self-hosted alternative to Scrivener + Vellum.</h3>
 
-**An open-source writing studio for novelists.** Write in the browser, get AI
-editorial help that runs on *your* API key, export retail-ready EPUB and PDF,
-and track your royalties. Self-host the whole thing.
+<p align="center">
+  Write your novel in the browser, get AI editorial help that runs on <em>your</em> API key,<br>
+  export retail-ready EPUB and PDF, and track your royalties. All on your own server.
+</p>
 
-> Status: pre-1.0, and honest about it. The studio works end to end; packaging,
-> a hosted demo, and the docs site are in progress. See `ROADMAP.md`.
+<p align="center">
+  <a href="https://github.com/julianavellaneda/manuhaven/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/julianavellaneda/manuhaven/ci.yml?branch=main&style=flat-square&label=CI" alt="CI"></a>
+  <a href="https://github.com/julianavellaneda/manuhaven/releases"><img src="https://img.shields.io/github/v/release/julianavellaneda/manuhaven?include_prereleases&sort=semver&style=flat-square" alt="Release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-AGPL--3.0-1d3a3f?style=flat-square" alt="License: AGPL-3.0"></a>
+  <a href="https://github.com/julianavellaneda/manuhaven/pkgs/container/manuhaven"><img src="https://img.shields.io/badge/docker-ghcr.io-1d3a3f?style=flat-square&logo=docker&logoColor=white" alt="Docker image"></a>
+</p>
+
+<p align="center">
+  <a href="#quick-start">Quick start</a> ·
+  <a href="docs/self-hosting.md">Self-hosting</a> ·
+  <a href="ROADMAP.md">Roadmap</a> ·
+  <a href="CONTRIBUTING.md">Contributing</a> ·
+  <a href="https://github.com/julianavellaneda/manuhaven/discussions">Discussions</a>
+</p>
+
+<p align="center">
+  <img src="docs/images/editor.webp" alt="The ManuHaven editor: a chapter list on the left, the manuscript in the middle, and the AI assistant answering questions about the book on the right" width="900">
+</p>
+
+> **Status: pre-1.0, and honest about it.** The studio works end to end;
+> a hosted demo and a docs site are still to come. See [`ROADMAP.md`](ROADMAP.md).
 
 ## What it does
 
@@ -24,7 +47,40 @@ and track your royalties. Self-host the whole thing.
 **AI is entirely optional and off by default.** With no key configured the AI
 surfaces stay inert and everything else works normally.
 
-## Quick start (Docker)
+<table>
+  <tr>
+    <td width="50%"><img src="docs/images/dashboard.webp" alt="Project board with book covers grouped by status: draft, formatting, publishing, live"><br><sub><b>Projects</b>: every book, from draft to live.</sub></td>
+    <td width="50%"><img src="docs/images/editorial.webp" alt="Editorial report with an overall score, strengths, and prioritized suggestions by chapter"><br><sub><b>Editorial report</b>: pacing, characters, plot and prose, chapter by chapter.</sub></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/images/preview.webp" alt="Export preview with a choice of genre templates and a rendered page of the manuscript"><br><sub><b>Format</b>: pick a genre template, preview it, export EPUB and PDF.</sub></td>
+    <td width="50%"><img src="docs/images/royalties.webp" alt="Royalties dashboard with total revenue, units sold, and revenue charts by retailer and territory"><br><sub><b>Royalties</b>: import retailer CSVs and see what each title earned.</sub></td>
+  </tr>
+</table>
+
+<sub>Screenshots show the demo account from <code>bun run db:seed</code>, with <em>Pride and Prejudice</em> from Project Gutenberg.</sub>
+
+## How it compares
+
+| | ManuHaven | Scrivener | Vellum | Calibre / Sigil | novelWriter / Manuskript | Atticus | Sudowrite |
+|---|---|---|---|---|---|---|---|
+| Open source | AGPL-3.0 | no | no | GPL | GPLv3 | no | no |
+| Self-hostable | yes | desktop only | desktop only (macOS) | desktop only | desktop only | no | no |
+| Write in a browser | yes | no | no | no | no | yes | yes |
+| AI that reads your book | yes, your key | no | no | no | no | no | yes, their key |
+| Generates prose for you | **no, by design** | no | no | no | no | no | yes |
+| EPUB + print PDF export | yes | yes | yes | yes | limited | yes | no |
+| Royalty tracking | yes | no | no | no | no | no | no |
+| Bilingual interface | EN + es-MX | many languages | EN | varies | varies | EN | EN |
+| Price | free | $59.99 once | from $199.99 once | free | free | $147 once | from $19/mo |
+
+The honest summary: Scrivener is a deeper desktop drafting tool, Vellum makes
+beautiful books on a Mac, Calibre and Sigil are better at converting and editing
+existing ebooks, and novelWriter is a lovely desktop novel manager. Nothing in
+that list does the whole loop — write, analyze, format, export, track — in one
+place that you can run yourself.
+
+## Quick start
 
 You need Docker and `openssl`. No cloud account of any kind: the database,
 auth, file storage and the export service all run in containers on your
@@ -42,82 +98,9 @@ app applies database migrations on start.
 [`docs/self-hosting.md`](docs/self-hosting.md) covers sign-in options, S3
 storage, reverse proxies, backups, and upgrades.
 
-## Quick start (development)
-
-You need [Bun](https://bun.sh) and Docker. The app runs on the host; Postgres
-and [Mailpit](https://mailpit.axllent.org) (a local inbox for magic links and
-password resets) run in `compose.dev.yml`.
-
-```bash
-git clone https://github.com/julianavellaneda/manuhaven.git
-cd manuhaven
-bun install
-
-cp .env.example .env.local
-# then set in .env.local:
-#   DATABASE_URL=postgres://manuhaven:manuhaven@localhost:5432/manuhaven
-#   BETTER_AUTH_SECRET=<openssl rand -hex 32>
-#   SMTP_HOST=localhost
-#   SMTP_PORT=1025
-
-bun run db:up          # Postgres on :5432, Mailpit on :1025 / http://localhost:8025
-bun run db:migrate
-bun run dev
-```
-
-Open <http://localhost:3000>. Sign up, create a project, and upload a
-manuscript. Uploaded files go to `./.data/files`.
-
-To enable exports, start the converter too:
-
-```bash
-bun run converter:up   # builds once, then serves on 127.0.0.1:3001
-# and in .env.local: CONVERTER_URL=http://localhost:3001, CONVERTER_API_KEY=manuhaven-dev
-```
-
-To enable AI, set `AI_KEY_ENCRYPTION_SECRET` (`openssl rand -base64 32`), then
-open **Settings → AI** in the app and paste in your own provider key. Keys are
-encrypted before they are stored.
-
-## Scripts
-
-```bash
-bun run dev               # Development server
-bun run build             # Production build
-bun run start             # Run the production build
-bun run lint              # ESLint
-bun run test              # Vitest unit tests
-bun run test:integration  # Against real Postgres (DATABASE_URL; `bun run db:up` first)
-
-bun run db:up             # Dev Postgres + Mailpit (compose.dev.yml)
-bun run db:generate       # Write a migration from lib/db/schema.ts changes
-bun run db:migrate        # Apply pending migrations
-bun run db:studio         # Browse the database (drizzle-kit studio)
-bun run converter:up      # Dev EPUB/PDF converter
-
-tests/integration/convert.sh   # DOCX -> EPUB -> epubcheck (needs Docker + a JRE)
-```
-
-## Environment
-
-`.env.example` is the canonical list, with a comment on every variable.
-`scripts/setup.sh` fills in the four secrets for Docker.
-
-| Variable | Required | Purpose |
-|---|---|---|
-| `POSTGRES_PASSWORD` | Docker | Password for the bundled Postgres |
-| `DATABASE_URL` | outside Docker | Compose builds it from `POSTGRES_PASSWORD` |
-| `BETTER_AUTH_SECRET` | yes | Signs sessions and auth tokens |
-| `NEXT_PUBLIC_APP_URL` | in production | Your public origin: auth base URL and canonical URLs. Read at runtime |
-| `AUTH_ALLOW_SIGNUP` · `AUTH_REQUIRE_EMAIL_VERIFICATION` | no | Close sign-up; require a confirmed address |
-| `SMTP_HOST` · `SMTP_PORT` · `SMTP_USER` · `SMTP_PASSWORD` · `SMTP_FROM` | for email | Magic links and password resets |
-| `GOOGLE_CLIENT_ID` · `GOOGLE_CLIENT_SECRET` | no | Google sign-in |
-| `STORAGE_DRIVER` · `STORAGE_DIR` | no | `fs` (default) or `s3`; `S3_*` configure the bucket |
-| `AI_KEY_ENCRYPTION_SECRET` | for BYOK | Encrypts user API keys at rest |
-| `ANTHROPIC_API_KEY` · `OPENAI_API_KEY` · `GOOGLE_GENERATIVE_AI_API_KEY` | no | Server-side fallback when a user has no key of their own |
-| `ASSISTANT_CHAT_MODEL` · `ASSISTANT_UTILITY_MODEL` | no | `"provider:modelId"` overrides |
-| `CONVERTER_URL` · `CONVERTER_API_KEY` | for exports | The EPUB/PDF service |
-| `NEXT_PUBLIC_POSTHOG_KEY` | no | Optional analytics; no-ops when unset |
+Want to hack on it instead? [`CONTRIBUTING.md`](CONTRIBUTING.md) has the
+development setup, including `bun run db:seed` for a demo account full of
+sample data.
 
 ## Architecture
 
@@ -162,6 +145,7 @@ flowchart LR
 | [`docs/i18n.md`](docs/i18n.md) | Translations, and adding a locale |
 | [`ROADMAP.md`](ROADMAP.md) | What is planned, and what never will be |
 
+Every environment variable is in [`docs/self-hosting.md`](docs/self-hosting.md#2-configure).
 `docs/platform/` holds the deeper reference material — schema, design system,
 EPUB specification.
 
@@ -188,25 +172,6 @@ EPUB specification.
   time. Pages ship a per-request nonce-based Content-Security-Policy.
 - **Bilingual by test.** A unit test fails the build if `en` and `es-MX` drift
   out of key parity.
-
-## How it compares
-
-| | ManuHaven | Calibre / Sigil | novelWriter / Manuskript | Atticus | Sudowrite |
-|---|---|---|---|---|---|
-| Open source | AGPL-3.0 | GPL | GPLv3 | no | no |
-| Self-hostable | yes | desktop only | desktop only | no | no |
-| Write in a browser | yes | no | no | yes | yes |
-| AI that reads your book | yes, your key | no | no | no | yes, their key |
-| Generates prose for you | **no, by design** | no | no | no | yes |
-| EPUB + print PDF export | yes | yes | limited | yes | no |
-| Royalty tracking | yes | no | no | no | no |
-| Bilingual interface | EN + es-MX | varies | varies | EN | EN |
-| Price | free | free | free | $147 once | from $19/mo |
-
-The honest summary: Calibre and Sigil are better at converting and editing
-existing ebooks, and novelWriter is a lovely desktop novel manager. Nothing in
-that list does the whole loop — write, analyze, format, export, track — in one
-place that you can run yourself.
 
 ## AI and privacy
 
