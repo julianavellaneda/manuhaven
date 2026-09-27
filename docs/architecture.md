@@ -175,10 +175,14 @@ from them:
 ├── drizzle/                      # Generated SQL migrations (never edit a shipped one)
 ├── scripts/
 │   ├── setup.sh                  # Writes .env with generated secrets
-│   └── migrate.ts                # Applies drizzle/ under an advisory lock
+│   ├── migrate.ts                # Applies drizzle/ under an advisory lock
+│   ├── seed-demo.ts              # `bun run db:seed`: demo account and sample data
+│   ├── demo/                     # Its public-domain books, covers, fixed AI results
+│   └── readme-screenshots.sh     # Retakes docs/images/ from the demo account
 ├── services/converter/           # EPUB/PDF conversion service (Pandoc + WeasyPrint)
 ├── tests/                        # unit/, integration/ (real Postgres), fixtures/
 ├── docs/                         # self-hosting.md, ai.md, i18n.md, architecture.md
+│   ├── images/                   # README logo, screenshots, social preview
 │   └── platform/                 # Deeper reference: schema, design system, EPUB
 ├── docker-compose.yml            # app + db + converter
 ├── compose.dev.yml               # Postgres, Mailpit (+ converter) for `bun run dev`

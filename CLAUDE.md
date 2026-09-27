@@ -264,6 +264,7 @@ bun run test:integration  # Real Postgres (+ S3 when S3_TEST_ENDPOINT is set)
 bun run db:up        # Dev Postgres + Mailpit (compose.dev.yml)
 bun run db:generate  # Migration from lib/db/schema.ts changes
 bun run db:migrate   # Apply pending migrations
+bun run db:seed      # Demo account (demo@example.com) with sample books and data
 bun run converter:up # Dev converter on 127.0.0.1:3001
 ```
 

@@ -88,6 +88,12 @@ you cannot relicense their work later without asking them.
 - **`AI_KEY_ENCRYPTION_SECRET` rotation** silently invalidates every stored user
   key. The app degrades gracefully (keys read as absent), but users must
   re-enter them. Never rotate it casually on a shared instance.
+- **README screenshots go stale.** They are not checked by CI. After a visible
+  UI change, run `bun run db:seed` and `./scripts/readme-screenshots.sh`
+  against `bun run dev` and commit `docs/images/`. The seed's fixed AI results
+  in `scripts/demo/analysis.ts` are typed against the Zod schemas, so a schema
+  change fails `tsc` there first. `docs/images/social-preview.png` is uploaded
+  by hand (Settings → General → Social preview) and has no source file.
 
 ## Security reports
 

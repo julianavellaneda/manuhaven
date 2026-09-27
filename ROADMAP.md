@@ -20,7 +20,8 @@ making it something a stranger can run.
 - [x] Docker images for the app and the converter, with no deployment
       configuration baked into the build
 - [x] CI: lint, types, tests, build, and a real DOCX → EPUB → epubcheck run
-- [ ] Hosted demo with a sample public-domain manuscript
+- [ ] Hosted demo with a sample public-domain manuscript (the data exists:
+      `bun run db:seed`)
 - [ ] Self-hosting documentation that has been followed by someone other than
       the author
 
