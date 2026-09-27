@@ -17,6 +17,7 @@ import {
   listProjectOptions,
   saveProjectAiMetadata,
   setProjectCover,
+  updateProjectDetails,
 } from "@/lib/db/queries/projects";
 import {
   claimAiCooldown,
@@ -132,6 +133,13 @@ describe("projects", () => {
     const board = await listDashboardProjects(alice);
     expect(board.map((p) => p.id)).toEqual([aliceProject]);
     expect(board[0].wordCount).toBe(1);
+  });
+
+  it("refuses to edit another user's project details", async () => {
+    expect(
+      await updateProjectDetails(bob, aliceProject, { status: "live" }),
+    ).toBe(false);
+    expect((await getOwnedProject(alice, aliceProject))?.status).toBe("draft");
   });
 
   it("refuses to write AI metadata to another user's project", async () => {

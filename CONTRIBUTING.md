@@ -8,18 +8,64 @@ By participating you agree to the [Code of Conduct](./CODE_OF_CONDUCT.md).
 
 ## Getting set up
 
-You need [Bun](https://bun.sh) and Docker. Postgres and Mailpit run in containers;
-the app runs on the host.
+You need [Bun](https://bun.sh) and Docker. The app runs on the host; Postgres
+and [Mailpit](https://mailpit.axllent.org) (a local inbox for magic links and
+password resets) run in `compose.dev.yml`.
 
 ```bash
 bun install
-cp .env.example .env.local   # set DATABASE_URL, BETTER_AUTH_SECRET, SMTP_HOST/PORT
-bun run db:up                # Postgres on :5432, Mailpit inbox at http://localhost:8025
+
+cp .env.example .env.local
+# then set in .env.local:
+#   DATABASE_URL=postgres://manuhaven:manuhaven@localhost:5432/manuhaven
+#   BETTER_AUTH_SECRET=<openssl rand -hex 32>
+#   SMTP_HOST=localhost
+#   SMTP_PORT=1025
+
+bun run db:up          # Postgres on :5432, Mailpit on :1025 / http://localhost:8025
 bun run db:migrate
+bun run db:seed        # optional: demo account with sample books (see below)
 bun run dev
 ```
 
-The README's development quick start lists the exact values for `.env.local`.
+Open <http://localhost:3000>. Uploaded files go to `./.data/files`.
+
+**Demo data.** `bun run db:seed` creates `demo@example.com` / `manuhaven-demo`
+with three public-domain Austen novels, a finished editorial report, a story
+bible, an assistant conversation and a year of royalties. It needs no AI key,
+and re-running it replaces the demo account and touches nothing else. The same
+account drives `./scripts/readme-screenshots.sh`, which retakes the images in
+`docs/images/`.
+
+**Exports.** Start the converter too:
+
+```bash
+bun run converter:up   # builds once, then serves on 127.0.0.1:3001
+# and in .env.local: CONVERTER_URL=http://localhost:3001, CONVERTER_API_KEY=manuhaven-dev
+```
+
+**AI.** Set `AI_KEY_ENCRYPTION_SECRET` (`openssl rand -base64 32`), then open
+**Settings → AI** in the app and paste in your own provider key.
+
+### Scripts
+
+```bash
+bun run dev               # Development server
+bun run build             # Production build
+bun run start             # Run the production build
+bun run lint              # ESLint
+bun run test              # Vitest unit tests
+bun run test:integration  # Against real Postgres (DATABASE_URL; `bun run db:up` first)
+
+bun run db:up             # Dev Postgres + Mailpit (compose.dev.yml)
+bun run db:generate       # Write a migration from lib/db/schema.ts changes
+bun run db:migrate        # Apply pending migrations
+bun run db:seed           # Demo account with sample data
+bun run db:studio         # Browse the database (drizzle-kit studio)
+bun run converter:up      # Dev EPUB/PDF converter
+
+tests/integration/convert.sh   # DOCX -> EPUB -> epubcheck (needs Docker + a JRE)
+```
 
 **Use `bun` for everything.** Never `npm`, `npx`, or `yarn` — use `bunx` in place of
 `npx`. Mixed lockfiles are the single most common broken PR. The converter in

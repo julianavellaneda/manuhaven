@@ -60,6 +60,22 @@ APP_PORT=3000                                   # host port the app is published
 AUTH_ALLOW_SIGNUP=false                         # after you have made your own account
 ```
 
+| Variable | Required | Purpose |
+|---|---|---|
+| `POSTGRES_PASSWORD` | Docker | Password for the bundled Postgres |
+| `DATABASE_URL` | outside Docker | Compose builds it from `POSTGRES_PASSWORD` |
+| `BETTER_AUTH_SECRET` | yes | Signs sessions and auth tokens |
+| `NEXT_PUBLIC_APP_URL` | in production | Your public origin: auth base URL and canonical URLs. Read at runtime |
+| `AUTH_ALLOW_SIGNUP` · `AUTH_REQUIRE_EMAIL_VERIFICATION` | no | Close sign-up; require a confirmed address |
+| `SMTP_HOST` · `SMTP_PORT` · `SMTP_USER` · `SMTP_PASSWORD` · `SMTP_FROM` | for email | Magic links and password resets |
+| `GOOGLE_CLIENT_ID` · `GOOGLE_CLIENT_SECRET` | no | Google sign-in |
+| `STORAGE_DRIVER` · `STORAGE_DIR` | no | `fs` (default) or `s3`; `S3_*` configure the bucket |
+| `AI_KEY_ENCRYPTION_SECRET` | for BYOK | Encrypts user API keys at rest |
+| `ANTHROPIC_API_KEY` · `OPENAI_API_KEY` · `GOOGLE_GENERATIVE_AI_API_KEY` | no | Server-side fallback when a user has no key of their own |
+| `ASSISTANT_CHAT_MODEL` · `ASSISTANT_UTILITY_MODEL` | no | `"provider:modelId"` overrides |
+| `CONVERTER_URL` · `CONVERTER_API_KEY` | for exports | The EPUB/PDF service |
+| `NEXT_PUBLIC_POSTHOG_KEY` | no | Optional analytics; no-ops when unset |
+
 `NEXT_PUBLIC_APP_URL` is read at runtime, not at build time, despite the
 prefix. Auth uses it as its base URL and only trusts requests from that origin,
 so it must match the address in your browser exactly, scheme included.
