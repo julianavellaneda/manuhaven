@@ -52,7 +52,7 @@
     "next-intl": "^4.14.7",
     "nodemailer": "^10.0.10",
     "pg": "^8.23.0",
-    "posthog-js": "^1.434.12",
+    "posthog-js": "^1.434.13",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "recharts": "^3.10.1",
