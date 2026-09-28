@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.1](https://github.com/julianavellaneda/manuhaven/compare/v0.1.0...v0.1.1) (2026-09-28)
+
+
+### Documentation
+
+* mention the demo seed and README screenshots in the reference docs ([#29](https://github.com/julianavellaneda/manuhaven/issues/29)) ([f6d6d2a](https://github.com/julianavellaneda/manuhaven/commit/f6d6d2ac91d6b6957c66717e2b26f2779d46b129))
+* polished README with screenshots, plus a demo-data seed ([#28](https://github.com/julianavellaneda/manuhaven/issues/28)) ([8c06ba9](https://github.com/julianavellaneda/manuhaven/commit/8c06ba93a553ac7c06b791a7c14505bf59fe0aa2))
+
+
+### Packaging
+
+* **release:** tag releases as vX.Y.Z so versioned images publish ([#25](https://github.com/julianavellaneda/manuhaven/issues/25)) ([d4b39fd](https://github.com/julianavellaneda/manuhaven/commit/d4b39fd5710a665ff0507cad45aed51cab1ebe8e))
+
 ## 0.1.0 (2026-09-25)
 
 
