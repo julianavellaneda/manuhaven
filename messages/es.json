@@ -161,8 +161,6 @@
       "searchPlaceholder": "Buscar manuscritos..."
     },
     "footer": {
-      "copyright": "ManuHaven, edición curada",
-      "systemStatus": "Estado del sistema",
       "documentation": "Documentación",
       "support": "Soporte"
     },
@@ -243,7 +241,8 @@
       "rename": "Renombrar",
       "splitAtCursor": "Dividir en el cursor",
       "mergeWithNext": "Fusionar con el siguiente",
-      "deleteChapter": "Eliminar capítulo"
+      "deleteChapter": "Eliminar capítulo",
+      "wordCount": "{count, plural, one {# palabra} other {# palabras}}"
     },
     "distractionFree": {
       "exitButton": "Salir",

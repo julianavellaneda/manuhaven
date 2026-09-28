@@ -161,8 +161,6 @@
       "searchPlaceholder": "Search manuscripts..."
     },
     "footer": {
-      "copyright": "The Curated ManuHaven",
-      "systemStatus": "System Status",
       "documentation": "Documentation",
       "support": "Support"
     },
@@ -243,7 +241,8 @@
       "rename": "Rename",
       "splitAtCursor": "Split at cursor",
       "mergeWithNext": "Merge with next",
-      "deleteChapter": "Delete chapter"
+      "deleteChapter": "Delete chapter",
+      "wordCount": "{count, plural, one {# word} other {# words}}"
     },
     "distractionFree": {
       "exitButton": "Exit",
