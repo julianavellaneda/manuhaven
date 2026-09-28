@@ -161,7 +161,7 @@ export function SortableChapterItem({
           )}
           {wordCount != null && !editing && (
             <p className="text-[0.65rem] text-muted-foreground">
-              {wordCount.toLocaleString()} words
+              {t("wordCount", { count: wordCount })}
             </p>
           )}
         </div>
