@@ -28,6 +28,12 @@ updates:
         update-types: ["version-update:semver-major"]
       - dependency-name: "@ai-sdk/*"
         update-types: ["version-update:semver-major"]
+      # Types must match the Node the images run (node:24-slim).
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+      # eslint-plugin-react (via eslint-config-next) crashes on ESLint 10.
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: bun
     directory: /services/converter
