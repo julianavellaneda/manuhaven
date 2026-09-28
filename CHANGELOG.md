@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/julianavellaneda/manuhaven/compare/v0.1.1...v0.1.2) (2026-09-28)
+
+
+### Bug fixes
+
+* **ui:** localize chapter word counts and clean up the dashboard footer ([#35](https://github.com/julianavellaneda/manuhaven/issues/35)) ([c00f5bd](https://github.com/julianavellaneda/manuhaven/commit/c00f5bd2b89e1b3ed576a21e882e550ecb63d176))
+
 ## [0.1.1](https://github.com/julianavellaneda/manuhaven/compare/v0.1.0...v0.1.1) (2026-09-28)
 
 
